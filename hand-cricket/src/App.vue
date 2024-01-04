@@ -1,27 +1,27 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header style="border:2px solid red">
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <v-layout>
+    <v-app-bar elevation="1" flat color="yellow-darken-3"
+        rounded density="compact">
+        <v-app-bar-title class="text-white">Hand Cricket</v-app-bar-title>
 
-    <div class="wrapper" style="">
-      <HelloWorld msg="You did it!" />
+        <template v-slot:append>
+          <v-btn color="white" size="x-large" @click="$router.push('/vueHome')" icon="$vuetify"></v-btn>
+        </template>
 
-      <nav>
-        <RouterLink to="/vueHome">Home</RouterLink>
-        <RouterLink to="/vueAbout">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+    </v-app-bar>
+  </v-layout>
   <RouterView />
 </template>
 
+<script setup lang="ts">
+import {RouterView } from 'vue-router'
+</script>
+
 <style scoped>
-header {
+:deep(.v-toolbar-title__placeholder){
+  font-weight: 600;
+}
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -81,5 +81,5 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}
+} */
 </style>
