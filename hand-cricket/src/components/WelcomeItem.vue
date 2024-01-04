@@ -14,7 +14,6 @@
 
 <style scoped>
 .item {
-  border:2px solid red;
   margin-top: 2rem;
   display: flex;
   position: relative;
