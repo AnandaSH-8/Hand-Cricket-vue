@@ -1,6 +1,8 @@
 <template>
     <v-layout class="HCbox">
-        <h1>Welcome to Hand Cricket Site</h1>
+        <v-card class="playerOne"></v-card>
+        <v-card class="stadiumDesign"></v-card>
+         <v-card class="playerTwo"></v-card>
     </v-layout>
 </template>
 
@@ -12,5 +14,18 @@
 .HCbox{
     background:rgb(129, 201, 252);
     height:92vh;
+    padding: 5vh 10%;
+}
+
+.HCbox > *{
+    border:2px solid red;
+}
+
+.playerTwo, .playerOne{
+    width:25%;
+}
+.stadiumDesign{
+    width:40%;
+    margin:0 7%;
 }
 </style>
