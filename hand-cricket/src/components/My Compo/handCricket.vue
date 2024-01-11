@@ -43,12 +43,14 @@
 }
 
 .HCbox > *{
-    border:2px solid red;
+    border-radius: 5%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
 .RunImage{
     width:100%;
     height:50%;
+    border-radius: 5%;
 }
 
 .playerTwo,.playerOne{
@@ -70,14 +72,17 @@
 
 #RunOptions  .v-col{
     width:35%;
-    padding-top:3%;
-    padding-bottom:3%;
+    padding-top:1%;
+    padding-bottom:2%;
 }
 
 #RunOptions  .v-col:last-child{
     padding-left: 38%;
 }
-
+#RunOptions  .v-col img{
+    border-radius: 10% 10%;
+    border:3px solid rgb(129, 201, 252);
+}
 .stadiumDesign{
     width:40%;
     margin:0 7%;
