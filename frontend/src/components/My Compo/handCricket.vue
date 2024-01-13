@@ -1,28 +1,30 @@
 <template>
   <v-layout class="HCbox">
     <v-container class="playerOne">
-      <v-card class="RunImage"></v-card>
+      <v-card class="RunImage">
+      <img :src="imagePath" alt="runImg">
+      </v-card>
       <v-row id="RunOptions">
         <v-col>
-          <img src="../../assets/component Images/Zero.png" />
+          <img @click="RunHit('Zero')" src="../../assets/component Images/Zero.png" alt="ZeroRun" />
         </v-col>
         <v-col>
-          <img src="../../assets/component Images/One.png" />
+          <img @click="RunHit('One')" src="../../assets/component Images/One.png" alt="OneRun" />
         </v-col>
         <v-col>
-          <img src="../../assets/component Images/Two.png" />
+          <img @click="RunHit('Two')" src="../../assets/component Images/Two.png" alt="TwoRun" />
         </v-col>
         <v-col>
-          <img src="../../assets/component Images/Three.png" />
+          <img @click="RunHit('Three')" src="../../assets/component Images/Three.png" alt="ThreeRun" />
         </v-col>
         <v-col>
-          <img src="../../assets/component Images/Four.png" />
+          <img @click="RunHit('Four')" src="../../assets/component Images/Four.png" alt="FourRun" />
         </v-col>
         <v-col>
-          <img src="../../assets/component Images/Five.png" />
+          <img @click="RunHit('Five')" src="../../assets/component Images/Five.png" alt="FiveRun" />
         </v-col>
         <v-col>
-          <img src="../../assets/component Images/Six.png" />
+          <img @click="RunHit('Six')" src="../../assets/component Images/Six.png" alt="SixRun" />
         </v-col>
       </v-row>
     </v-container>
@@ -31,7 +33,24 @@
   </v-layout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {ref, computed} from 'vue';
+const scoredRun = ref('');
+
+function RunHit(run){
+  scoredRun.value = run;
+  console.log(scoredRun.value,'IS AT LINE NUMBER 42');
+}
+
+const imagePath = computed(()=>{
+      if (scoredRun.value!== '') {
+      let a = `../../assets/component Images/${scoredRun.value}.png`;
+      console.log(a,'IS AT LINE NUMBER 49');
+      return a;
+    }
+    return ''
+})
+</script>
 
 <style scoped>
 .HCbox {
