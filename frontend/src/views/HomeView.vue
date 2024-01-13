@@ -1,27 +1,27 @@
 <template>
-   <v-container class="vueHomeContainer">
-      <header>
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <v-container class="vueHomeContainer">
+    <header>
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-        <div class="wrapper" style="">
-          <HelloWorld msg="You did it!" />
+      <div class="wrapper" style="">
+        <HelloWorld msg="You did it!" />
 
-          <nav>
-            <RouterLink to="/vueHome">Home</RouterLink>
-            <RouterLink to="/vueAbout">About</RouterLink>
-          </nav>
-        </div>
-      </header>
-      <main>
-        <TheWelcome />
-      </main>
-   </v-container>
+        <nav>
+          <RouterLink to="/vueHome">Home</RouterLink>
+          <RouterLink to="/vueAbout">About</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <TheWelcome />
+    </main>
+  </v-container>
 </template>
 
 <script setup lang="ts">
-  import { RouterLink } from 'vue-router'
-  import HelloWorld from '../components/HelloWorld.vue'
-  import TheWelcome from '../components/TheWelcome.vue'
+import { RouterLink } from 'vue-router'
+import HelloWorld from '../components/HelloWorld.vue'
+import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <style scoped>
@@ -30,7 +30,7 @@ header {
   max-height: 100vh;
   margin-top: 1vh;
 }
-.vueHomeContainer{
+.vueHomeContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
