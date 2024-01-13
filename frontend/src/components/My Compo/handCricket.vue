@@ -2,29 +2,33 @@
   <v-layout class="HCbox">
     <v-container class="playerOne">
       <v-card class="RunImage">
-      <img :src="imagePath" alt="runImg">
+      <img v-if="scoredRun" :src="imagePath" alt="runImg">
       </v-card>
-      <v-row id="RunOptions">
+      <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
-          <img @click="RunHit('Zero')" src="../../assets/component Images/Zero.png" alt="ZeroRun" />
+          <img @click="RunHit('Zero')" src="../../assets/component Images/Zero.svg" alt="ZeroRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('One')" src="../../assets/component Images/One.png" alt="OneRun" />
+          <img @click="RunHit('One')" src="../../assets/component Images/One.svg" alt="OneRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Two')" src="../../assets/component Images/Two.png" alt="TwoRun" />
+          <img @click="RunHit('Two')" src="../../assets/component Images/Two.svg" alt="TwoRun" />
+        </v-col>
+      </v-row>
+      <v-row class="RunOptions">
+        <v-col>
+            <img @click="RunHit('Three')" src="../../assets/component Images/Three.svg" alt="ThreeRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Three')" src="../../assets/component Images/Three.png" alt="ThreeRun" />
+          <img @click="RunHit('Four')" src="../../assets/component Images/Four.svg" alt="FourRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Four')" src="../../assets/component Images/Four.png" alt="FourRun" />
+          <img @click="RunHit('Five')" src="../../assets/component Images/Five.svg" alt="FiveRun" />
         </v-col>
+      </v-row>
+      <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
-          <img @click="RunHit('Five')" src="../../assets/component Images/Five.png" alt="FiveRun" />
-        </v-col>
-        <v-col>
-          <img @click="RunHit('Six')" src="../../assets/component Images/Six.png" alt="SixRun" />
+          <img @click="RunHit('Six')" src="../../assets/component Images/Six.svg" alt="SixRun" />
         </v-col>
       </v-row>
     </v-container>
@@ -39,17 +43,15 @@ const scoredRun = ref('');
 
 function RunHit(run){
   scoredRun.value = run;
-  console.log(scoredRun.value,'IS AT LINE NUMBER 42');
 }
 
 const imagePath = computed(()=>{
       if (scoredRun.value!== '') {
-      let a = `../../assets/component Images/${scoredRun.value}.png`;
-      console.log(a,'IS AT LINE NUMBER 49');
-      return a;
+      return new URL(`../../assets/component Images/${scoredRun.value}.svg`,import.meta.url).href
     }
     return ''
 })
+
 </script>
 
 <style scoped>
@@ -71,6 +73,10 @@ const imagePath = computed(()=>{
   height: 50%;
   border-radius: 5%;
 }
+.RunImage > img{
+  width:80%;
+  height: 80%;
+}
 
 .playerTwo,
 .playerOne {
@@ -84,22 +90,28 @@ const imagePath = computed(()=>{
   height: unset;
 }
 
-.v-row {
+.playerOne .RunOptions {
   margin: 0;
-  margin-top: 8%;
+  margin-top:1%;
 }
 
-#RunOptions .v-col {
-  width: 35%;
+.playerOne .RunOptions_firstRow{
+  margin-top:6%;
+}
+
+.RunOptions .v-col {
   padding-top: 1%;
-  padding-bottom: 2%;
+  padding-bottom: 0;
 }
 
-#RunOptions .v-col:last-child {
-  padding-left: 38%;
+.playerOne .RunOptions_lastRow {
+  width: 33%;
+  margin: auto;
+  margin-top:4%;
 }
-#RunOptions .v-col img {
+.RunOptions .v-col img {
   border-radius: 10% 10%;
+  width: 100%;
   border: 3px solid rgb(129, 201, 252);
 }
 .stadiumDesign {
