@@ -40,9 +40,11 @@
       </v-row>
     </v-container>
     <v-card class="stadiumDesign">
-      <strong v-if="timer != null">{{ timer == 0 ? "Let's Go":timer }}</strong>
+      <strong v-if="timer != null">{{ timer }}</strong>
     </v-card>
-    <v-card class="playerTwo"></v-card>
+    <v-card class="playerTwo">
+     <img v-if="computerRun" :src="computerRun" alt="runImg">
+    </v-card>
   </v-layout>
 </template>
 
@@ -50,6 +52,7 @@
 import {ref, computed} from 'vue';
 let scoredRun = ref('');
 let timer = ref(null);
+let computerRun = ref('');
 
 const imagePath = computed(()=>{
       if (scoredRun.value!== '') {
@@ -76,7 +79,9 @@ function RunHit(run){
 }
 
 function displayComputerRun(){
-  //
+  const runs = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+  const runScored = runs[Math. floor(Math. random() * runs. length)];
+  computerRun.value = new URL(`../../assets/component Images/${runScored}.svg`,import.meta.url).href
 }
 
 </script>
@@ -102,11 +107,16 @@ function displayComputerRun(){
   text-align: center;
   background: #76B438;
 }
-.RunImage > img{
+.RunImage > img, .playerTwo > img{
   width:90%;
   margin-top: 10%;
   height: 80%;
 }
+
+ .playerTwo > img{
+  width: 80%;
+  margin-left: 10%;
+ }
 
 .playerTwo,
 .playerOne {
@@ -156,5 +166,9 @@ function displayComputerRun(){
   font-size: 50px;
   color:red;
   z-index: 100;
+}
+
+.playerTwo{
+  background: #76B438;
 }
 </style>
