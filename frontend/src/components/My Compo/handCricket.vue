@@ -2,48 +2,54 @@
   <v-layout class="HCbox">
     <v-container class="playerOne">
       <v-card class="RunImage">
-      <img v-if="scoredRun" :src="imagePath" alt="runImg">
+        <img v-if="scoredRun" :src="imagePath" alt="runImg">
       </v-card>
       <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
-          <img @click="RunHit('Zero')" src="../../assets/component Images/Zero.svg" alt="ZeroRun" />
+          <img @click="RunHit('Zero')" :style="{border:scoredRun =='Zero' ? '2px solid red':'3px solid #81c9fc'}"
+            src="../../assets/component Images/Zero.svg" alt="ZeroRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('One')" src="../../assets/component Images/One.svg" alt="OneRun" />
+          <img @click="RunHit('One')" :style="{border:scoredRun =='One' ? '2px solid red':'3px solid #81c9fc'}" 
+            src="../../assets/component Images/One.svg" alt="OneRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Two')" src="../../assets/component Images/Two.svg" alt="TwoRun" />
+          <img @click="RunHit('Two')" :style="{border:scoredRun =='Two' ? '2px solid red':'3px solid #81c9fc'}" 
+            src="../../assets/component Images/Two.svg" alt="TwoRun" />
         </v-col>
       </v-row>
       <v-row class="RunOptions">
         <v-col>
-            <img @click="RunHit('Three')" src="../../assets/component Images/Three.svg" alt="ThreeRun" />
+            <img @click="RunHit('Three')" :style="{border:scoredRun =='Three' ? '2px solid red':'3px solid #81c9fc'}" 
+              src="../../assets/component Images/Three.svg" alt="ThreeRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Four')" src="../../assets/component Images/Four.svg" alt="FourRun" />
+          <img @click="RunHit('Four')" :style="{border:scoredRun =='Four' ? '2px solid red':'3px solid #81c9fc'}" 
+            src="../../assets/component Images/Four.svg" alt="FourRun" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Five')" src="../../assets/component Images/Five.svg" alt="FiveRun" />
+          <img @click="RunHit('Five')" :style="{border:scoredRun =='Five' ? '2px solid red':'3px solid #81c9fc'}" 
+            src="../../assets/component Images/Five.svg" alt="FiveRun" />
         </v-col>
       </v-row>
       <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
-          <img @click="RunHit('Six')" src="../../assets/component Images/Six.svg" alt="SixRun" />
+          <img @click="RunHit('Six')" :style="{border:scoredRun =='Six' ? '2px solid red':'3px solid #81c9fc'}" 
+            src="../../assets/component Images/Six.svg" alt="SixRun" />
         </v-col>
       </v-row>
     </v-container>
-    <v-card class="stadiumDesign"></v-card>
+    <v-card class="stadiumDesign">
+      <strong v-if="timer != null">{{ timer == 0 ? "Let's Go":timer }}</strong>
+    </v-card>
     <v-card class="playerTwo"></v-card>
   </v-layout>
 </template>
 
 <script setup lang="ts">
 import {ref, computed} from 'vue';
-const scoredRun = ref('');
-
-function RunHit(run){
-  scoredRun.value = run;
-}
+let scoredRun = ref('');
+let timer = ref(null);
 
 const imagePath = computed(()=>{
       if (scoredRun.value!== '') {
@@ -51,6 +57,27 @@ const imagePath = computed(()=>{
     }
     return ''
 })
+
+function RunHit(run){
+  // const emptyCard = setTimeout(()=>{
+  //     scoredRun.value = '';
+  //     clearTimeout(emptyCard);
+  // },10000)
+  scoredRun.value = run;
+
+  timer.value = 3;
+  const timeEnds = setInterval(()=>{
+      timer.value--
+      if(timer.value == 0){
+        displayComputerRun()
+        clearInterval(timeEnds)
+      }
+  },1500)
+}
+
+function displayComputerRun(){
+  //
+}
 
 </script>
 
@@ -72,9 +99,12 @@ const imagePath = computed(()=>{
   width: 100%;
   height: 50%;
   border-radius: 5%;
+  text-align: center;
+  background: #76B438;
 }
 .RunImage > img{
-  width:80%;
+  width:90%;
+  margin-top: 10%;
   height: 80%;
 }
 
@@ -112,10 +142,19 @@ const imagePath = computed(()=>{
 .RunOptions .v-col img {
   border-radius: 10% 10%;
   width: 100%;
-  border: 3px solid rgb(129, 201, 252);
+  border: 3px solid #81c9fc;
 }
 .stadiumDesign {
   width: 40%;
   margin: 0 7%;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+
+.stadiumDesign > strong{
+  font-size: 50px;
+  color:red;
+  z-index: 100;
 }
 </style>
