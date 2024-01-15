@@ -61,7 +61,7 @@ const imagePath = computed(()=>{
     return ''
 })
 
-function RunHit(run){
+function RunHit(run=""){
   // const emptyCard = setTimeout(()=>{
   //     scoredRun.value = '';
   //     clearTimeout(emptyCard);

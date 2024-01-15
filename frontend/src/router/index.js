@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'cricketHome',
-      component: () => import('../components/My Compo/handCricket.vue')
+      component: () => import('../components/My Compo/EntryOverlay.vue')
     }
   ]
 })
