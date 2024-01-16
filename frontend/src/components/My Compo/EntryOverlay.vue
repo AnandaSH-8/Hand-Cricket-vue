@@ -5,8 +5,7 @@
             <v-text-field class="userNameInput" density="comfortable"
                 label="User Name" variant="outlined">
             </v-text-field>
-            <v-btn color="primary" class="playButton" @click="startPlay">
-                <v-icon color="white">mdi-play-circle</v-icon>
+            <v-btn class="playButton text-none" @click="startPlay" prepend-icon="mdi-play-circle">
                 Let's Play
             </v-btn>
         </v-card>
@@ -37,6 +36,7 @@ function startPlay(){
     margin-top: 7vh;
     margin-bottom: 9vh;
     background: #f9b851;
+    text-align: center;
 }
 
 .userNameInput{
@@ -47,14 +47,10 @@ function startPlay(){
     border-radius: 5px;
 }
 
-/* .playButton{
-   background-color:black;
-} */
-:deep(.v-icon){
-    color:rgb(255, 255, 255)(255, 255, 255) !important;
-    /* position: absolute;
-    font-size: 50px;
-    top:100px;
-    left:200px; */
+.playButton{
+margin-top: 10vh;
+background-color: rgb(129, 201, 252);
+color:white;
 }
+
 </style>
