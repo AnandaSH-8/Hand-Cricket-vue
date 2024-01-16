@@ -2,7 +2,13 @@
     <v-layout style=" background: rgb(129, 201, 252)">
     <template v-if="!playStarted">
         <v-card width="350" height="450" class="entryCard">
-            <v-btn @click="startPlay" >Let's Play</v-btn>
+            <v-text-field class="userNameInput" density="comfortable"
+                label="User Name" variant="outlined">
+            </v-text-field>
+            <v-btn color="primary" class="playButton" @click="startPlay">
+                <v-icon color="white">mdi-play-circle</v-icon>
+                Let's Play
+            </v-btn>
         </v-card>
     </template>
     <template v-else>
@@ -31,5 +37,24 @@ function startPlay(){
     margin-top: 7vh;
     margin-bottom: 9vh;
     background: #f9b851;
+}
+
+.userNameInput{
+    margin:0 10%;
+    margin-top: 20%;
+    background-color: white;
+    height: 47px;
+    border-radius: 5px;
+}
+
+/* .playButton{
+   background-color:black;
+} */
+:deep(.v-icon){
+    color:rgb(255, 255, 255)(255, 255, 255) !important;
+    /* position: absolute;
+    font-size: 50px;
+    top:100px;
+    left:200px; */
 }
 </style>
