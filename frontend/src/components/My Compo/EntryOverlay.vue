@@ -5,9 +5,15 @@
             <v-text-field class="userNameInput" density="comfortable"
                 label="User Name" variant="outlined">
             </v-text-field>
-            <v-btn class="playButton text-none" @click="startPlay" prepend-icon="mdi-play-circle">
-                Let's Play
-            </v-btn>
+            <v-card-actions class="cardActions">
+                <v-btn class="playButton text-none" @click="startPlay" prepend-icon="mdi-play-circle">
+                    Let's Play
+                </v-btn>
+                <v-btn class="playButton text-none"  prepend-icon="mdi-settings">
+                <v-icon icon="mdi-settings"></v-icon>
+                    Settings &nbsp;
+                </v-btn>
+            </v-card-actions>
         </v-card>
     </template>
     <template v-else>
@@ -46,9 +52,15 @@ function startPlay(){
     height: 47px;
     border-radius: 5px;
 }
+.cardActions{
+    display: flex;
+    flex-direction: column;
+    border:1px solid red;
+    margin-top: 10vh;
+}
 
 .playButton{
-margin-top: 10vh;
+    margin : 2vh;
 background-color: rgb(129, 201, 252);
 color:white;
 }
