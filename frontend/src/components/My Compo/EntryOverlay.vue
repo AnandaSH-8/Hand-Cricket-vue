@@ -2,15 +2,16 @@
     <v-layout style=" background: rgb(129, 201, 252)">
     <template v-if="!playStarted">
         <v-card width="350" height="450" class="entryCard">
-            <v-text-field class="userNameInput" density="comfortable"
-                label="User Name" variant="outlined">
+            <v-text-field v-model="username" class="userNameInput"
+                :rules="[v => !!v.toString().trim() || 'Minimum 3 letters']"
+                 density="comfortable" label="User Name" variant="outlined">
             </v-text-field>
             <v-card-actions class="cardActions">
-                <v-btn class="playButton text-none" @click="startPlay" prepend-icon="mdi-play-circle">
+                <v-btn class="playButton text-none" @click="startPlay" :disabled="checkUserName"
+                prepend-icon="mdi-play-circle">
                     Let's Play
                 </v-btn>
-                <v-btn class="playButton text-none"  prepend-icon="mdi-settings">
-                <v-icon icon="mdi-settings"></v-icon>
+                <v-btn class="playButton text-none"  prepend-icon="mdi-cog">
                     Settings &nbsp;
                 </v-btn>
             </v-card-actions>
@@ -23,14 +24,23 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import HandCricket from "./playStadium.vue"
 import { ref } from 'vue';
 
 let playStarted = ref(false);
+let username = ref('');
 
 function startPlay(){
     playStarted.value = true;
 }
+
+const checkUserName = computed(()=>{
+    if(username.value.length > 2 && username.value.toString().trim()){
+        return false;
+    }
+    return true;
+})
 
 </script>
 
@@ -55,7 +65,7 @@ function startPlay(){
 .cardActions{
     display: flex;
     flex-direction: column;
-    border:1px solid red;
+    border:1px ridge rgb(223, 235, 243);
     margin-top: 10vh;
 }
 
@@ -63,6 +73,13 @@ function startPlay(){
     margin : 2vh;
 background-color: rgb(129, 201, 252);
 color:white;
+}
+
+:deep(.v-input--density-comfortable .v-field__input){
+    font-weight: 900;
+    text-transform: capitalize;
+    color:#fa7e25;
+    text-align: center;
 }
 
 </style>
