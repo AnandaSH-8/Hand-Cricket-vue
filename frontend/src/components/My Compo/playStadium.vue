@@ -6,36 +6,43 @@
       </v-card>
       <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
-          <img @click="RunHit('Zero')" :style="{border:scoredRun =='Zero' ? '2px solid red':'3px solid #81c9fc'}"
-            src="../../assets/component Images/Zero.svg" alt="ZeroRun" />
+          <img
+            :style="{border:scoredRun =='Zero' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Zero.svg"
+            alt="ZeroRun" @click="RunHit('Zero')" />
         </v-col>
         <v-col>
-          <img @click="RunHit('One')" :style="{border:scoredRun =='One' ? '2px solid red':'3px solid #81c9fc'}" 
-            src="../../assets/component Images/One.svg" alt="OneRun" />
+          <img
+            :style="{border:scoredRun =='One' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/One.svg" 
+            alt="OneRun" @click="RunHit('One')" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Two')" :style="{border:scoredRun =='Two' ? '2px solid red':'3px solid #81c9fc'}" 
-            src="../../assets/component Images/Two.svg" alt="TwoRun" />
+          <img
+            :style="{border:scoredRun =='Two' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Two.svg" 
+            alt="TwoRun" @click="RunHit('Two')" />
         </v-col>
       </v-row>
       <v-row class="RunOptions">
         <v-col>
-            <img @click="RunHit('Three')" :style="{border:scoredRun =='Three' ? '2px solid red':'3px solid #81c9fc'}" 
-              src="../../assets/component Images/Three.svg" alt="ThreeRun" />
+            <img
+              :style="{border:scoredRun =='Three' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Three.svg" 
+              alt="ThreeRun" @click="RunHit('Three')" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Four')" :style="{border:scoredRun =='Four' ? '2px solid red':'3px solid #81c9fc'}" 
-            src="../../assets/component Images/Four.svg" alt="FourRun" />
+          <img
+              :style="{border:scoredRun =='Four' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Four.svg" 
+            alt="FourRun" @click="RunHit('Four')" />
         </v-col>
         <v-col>
-          <img @click="RunHit('Five')" :style="{border:scoredRun =='Five' ? '2px solid red':'3px solid #81c9fc'}" 
-            src="../../assets/component Images/Five.svg" alt="FiveRun" />
+          <img
+              :style="{border:scoredRun =='Five' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Five.svg" 
+            alt="FiveRun" @click="RunHit('Five')" />
         </v-col>
       </v-row>
       <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
-          <img @click="RunHit('Six')" :style="{border:scoredRun =='Six' ? '2px solid red':'3px solid #81c9fc'}" 
-            src="../../assets/component Images/Six.svg" alt="SixRun" />
+          <img
+              :style="{border:scoredRun =='Six' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Six.svg" 
+            alt="SixRun" @click="RunHit('Six')" />
         </v-col>
       </v-row>
     </v-container>
@@ -68,14 +75,14 @@ function RunHit(run=""){
   // },10000)
   scoredRun.value = run;
 
-  timer.value = 3;
-  const timeEnds = setInterval(()=>{
-      timer.value--
-      if(timer.value == 0){
+  // timer.value = 3;
+  // const timeEnds = setInterval(()=>{
+  //     timer.value--
+  //     if(timer.value == 0){
         displayComputerRun()
-        clearInterval(timeEnds)
-      }
-  },1500)
+  //       clearInterval(timeEnds)
+  //     }
+  // },1500)
 }
 
 function displayComputerRun(){
