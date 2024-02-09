@@ -74,21 +74,20 @@ function RunHit(run=""){
   //     clearTimeout(emptyCard);
   // },10000)
   scoredRun.value = run;
-
-  // timer.value = 3;
-  // const timeEnds = setInterval(()=>{
-  //     timer.value--
-  //     if(timer.value == 0){
-        displayComputerRun()
-  //       clearInterval(timeEnds)
-  //     }
-  // },1500)
+  displayComputerRun()
 }
 
 function displayComputerRun(){
-  const runs = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
-  const runScored = runs[Math. floor(Math. random() * runs. length)];
-  computerRun.value = new URL(`../../assets/component Images/${runScored}.svg`,import.meta.url).href
+    timer.value = 3;
+    const timeEnds = setInterval(()=>{
+        timer.value--
+        if(timer.value == 0){
+          const runs = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+          const runScored = runs[Math. floor(Math. random() * runs. length)];
+          computerRun.value = new URL(`../../assets/component Images/${runScored}.svg`,import.meta.url).href
+          clearInterval(timeEnds)
+        }
+    },1500)
 }
 
 </script>
