@@ -60,13 +60,15 @@ import {ref, computed} from 'vue';
 let scoredRun = ref('');
 let timer = ref(null);
 let computerRun = ref('');
+let imagePath = ref('')
 
-const imagePath = computed(()=>{
-      if (scoredRun.value!== '') {
-      return new URL(`../../assets/component Images/${scoredRun.value}.svg`,import.meta.url).href
-    }
-    return ''
-})
+// const imagePath = computed(()=>{
+//         console.log(Date.now(),'IS AT LINE NUMBER 65');
+//       if (scoredRun.value!== '') {
+//       return new URL(`../../assets/component Images/${scoredRun.value}.svg`,import.meta.url).href
+//     }
+//     return ''
+// })
 
 function RunHit(run=""){
   // const emptyCard = setTimeout(()=>{
@@ -74,6 +76,9 @@ function RunHit(run=""){
   //     clearTimeout(emptyCard);
   // },10000)
   scoredRun.value = run;
+  if (scoredRun.value!== '') {
+    imagePath.value =  new URL(`../../assets/component Images/${scoredRun.value}.svg`,import.meta.url).href
+  }
   displayComputerRun()
 }
 
@@ -159,6 +164,7 @@ function displayComputerRun(){
   border-radius: 10% 10%;
   width: 100%;
   border: 3px solid #81c9fc;
+  cursor: pointer;
 }
 .stadiumDesign {
   width: 40%;
