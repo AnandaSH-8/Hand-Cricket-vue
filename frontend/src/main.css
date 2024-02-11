@@ -1,0 +1,6 @@
+.globalButton{
+    background-color: rgb(129, 201, 252);
+    color:white;
+    text-transform: capitalize;
+    margin-top: 2vh;
+}

@@ -2,6 +2,7 @@
   <v-layout class="HCbox">
     <v-container class="playerOne">
       <v-card class="RunImage">
+       <v-card-title class="cardTitle">You</v-card-title>
         <img v-if="scoredRun" :src="imagePath" alt="runImg">
       </v-card>
       <v-row class="RunOptions RunOptions_firstRow">
@@ -47,9 +48,17 @@
       </v-row>
     </v-container>
     <v-card class="stadiumDesign">
-      <strong v-if="timer != null">{{ timer }}</strong>
+      <v-card-text>
+        <strong v-if="timer != null">{{ timer == 0 ? '' :timer }}</strong>
+      </v-card-text>
+      <v-card-actions class="stadiumActions">
+        <p>It's time for Toss! Choose any</p>
+        <v-btn class="tossBtn globalButton mr-6">Odd</v-btn>
+        <v-btn class="tossBtn globalButton">Even</v-btn>
+      </v-card-actions>
     </v-card>
     <v-card class="playerTwo">
+    <v-card-title class="cardTitle">Computer</v-card-title>
      <img v-if="computerRun" :src="computerRun" alt="runImg">
     </v-card>
   </v-layout>
@@ -111,6 +120,14 @@ function displayComputerRun(){
     rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
+.cardTitle{
+  color:#f9b851;
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  top:-5%;
+}
+
 .RunImage {
   width: 100%;
   height: 50%;
@@ -169,18 +186,32 @@ function displayComputerRun(){
 .stadiumDesign {
   width: 40%;
   margin: 0 7%;
-  display: flex;
-  place-content: center;
-  place-items: center;
+   color: #f9b851;
 }
 
-.stadiumDesign > strong{
+.stadiumDesign  strong{
   font-size: 50px;
-  color:red;
+  /* color:#f9b851; */
   z-index: 100;
 }
 
 .playerTwo{
   background: #76B438;
+}
+
+.stadiumActions{
+  position: relative;
+  top:50%;
+  transform: translateY(-100%);
+  display:block;
+  text-align:center;
+}
+
+.stadiumActions > p{
+  font-size: 20px;
+}
+
+.tossBtn{
+  gap:4vh;
 }
 </style>
