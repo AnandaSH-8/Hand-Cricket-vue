@@ -7,11 +7,11 @@
                  density="comfortable" label="User Name" variant="outlined">
             </v-text-field>
             <v-card-actions class="cardActions">
-                <v-btn class="playButton globalButton" @click="startPlay" :disabled="checkUserName"
+                <v-btn class="globalButton ml-2" @click="startPlay" :disabled="checkUserName"
                 prepend-icon="mdi-play-circle">
                     Let's Play
                 </v-btn>
-                <v-btn class="playButton globalButton"  prepend-icon="mdi-cog">
+                <v-btn class="globalButton mt-4"  prepend-icon="mdi-cog">
                     Settings &nbsp;
                 </v-btn>
             </v-card-actions>
@@ -68,10 +68,6 @@ const checkUserName = computed(()=>{
     border:1px ridge rgb(223, 235, 243);
     margin-top: 10vh;
 }
-
-/* .playButton{
-    margin : 2vh;
-} */
 
 :deep(.v-input--density-comfortable .v-field__input){
     font-weight: 900;
