@@ -1,6 +1,6 @@
 <template>
     <v-layout style=" background: rgb(129, 201, 252)">
-    <template v-if="!playStarted">
+    <template v-if="playStarted">
         <v-card width="350" height="450" class="entryCard">
             <v-text-field v-model="username" class="userNameInput"
                 :rules="[v => !!v.toString().trim() || 'Minimum 3 letters']"

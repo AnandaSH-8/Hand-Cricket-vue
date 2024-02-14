@@ -52,36 +52,39 @@
         <strong v-if="gameKeys.timer != null">{{ gameKeys.timer == 0 ? '' :gameKeys.timer }}</strong>
       </v-card-text>
       <v-card-actions class="stadiumActions">
-        <template v-if="gameKeys.tossTime"> 
+        <!-- <template v-if="gameKeys.tossTime"> 
           <p>It's time for Toss! Choose any</p>
           <v-btn class="tossBtn globalButton mr-6" @click="tossSelected('Odd')">Odd</v-btn>
           <v-btn class="tossBtn globalButton" @click="tossSelected('Even')">Even</v-btn>
         </template>
         <template v-if="gameKeys.tossSelected">
           <p>Great! You chose {{ gameKeys.tossSelected }}. Now click on any Hand Gesture for the Toss</p>
-        </template>
+        </template> -->
       </v-card-actions>
     </v-card>
     <v-card class="playerTwo">
     <v-card-title class="cardTitle">Computer</v-card-title>
      <img v-if="gameKeys.computerRun" :src="gameKeys.computerRun" alt="runImg">
     </v-card>
+    <HangingBoard :data="gameKeys.propsData" @close-board="closeDialog"></HangingBoard>
   </v-layout>
 </template>
 
 <script setup>
+import HangingBoard from "./hangingBoard.vue"
 import {ref, onMounted} from 'vue';
 let gameKeys = ref({
   scoredRun:'',
   timer:null,
   computerRun:'',
   imagePath:'',
-  tossTime:false,
-  tossSelected:'',
+  propsData:{open:false, part:''}
 })
 
 onMounted(() => {
- gameKeys.value.tossTime = true;
+//  gameKeys.value.tossTime = true;
+  gameKeys.value.propsData = {open:true, part:'toss'}
+
 })
 
 function RunHit(run=""){
@@ -109,10 +112,8 @@ function displayComputerRun(){
     },1500)
 }
 
-function tossSelected(toss){
-  gameKeys.value.tossTime = false;
-  gameKeys.value.tossSelected = toss;
-
+function closeDialog(){
+  gameKeys.value.propsData = {open:false,part:''}
 }
 
 </script>
@@ -208,21 +209,5 @@ function tossSelected(toss){
 
 .playerTwo{
   background: #76B438;
-}
-
-.stadiumActions{
-  position: relative;
-  top:50%;
-  transform: translateY(-100%);
-  display:block;
-  text-align:center;
-}
-
-.stadiumActions > p{
-  font-size: 20px;
-}
-
-.tossBtn{
-  gap:4vh;
 }
 </style>
