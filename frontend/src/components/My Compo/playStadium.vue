@@ -3,47 +3,47 @@
     <v-container class="playerOne">
       <v-card class="RunImage">
        <v-card-title class="cardTitle">You</v-card-title>
-        <img v-if="gameKeys.scoredRun" :src="gameKeys.imagePath" alt="runImg">
+        <img v-if="gameKeys.scoredRun.str" :src="gameKeys.imagePath" alt="runImg">
       </v-card>
       <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun =='Zero' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Zero.svg"
-            alt="ZeroRun" @click="RunHit('Zero')" />
+            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Zero.svg"
+            alt="ZeroRun" @click="RunHit('Zero',0)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun =='One' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/One.svg" 
-            alt="OneRun" @click="RunHit('One')" />
+            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/One.svg" 
+            alt="OneRun" @click="RunHit('One',1)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun =='Two' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Two.svg" 
-            alt="TwoRun" @click="RunHit('Two')" />
+            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Two.svg" 
+            alt="TwoRun" @click="RunHit('Two',2)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions">
         <v-col>
             <img
-              :style="{border:gameKeys.scoredRun =='Three' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Three.svg" 
-              alt="ThreeRun" @click="RunHit('Three')" />
+              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Three.svg" 
+              alt="ThreeRun" @click="RunHit('Three',3)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun =='Four' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Four.svg" 
-            alt="FourRun" @click="RunHit('Four')" />
+              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Four.svg" 
+            alt="FourRun" @click="RunHit('Four',4)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun =='Five' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Five.svg" 
-            alt="FiveRun" @click="RunHit('Five')" />
+              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Five.svg" 
+            alt="FiveRun" @click="RunHit('Five',5)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun =='Six' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Six.svg" 
-            alt="SixRun" @click="RunHit('Six')" />
+              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Six.svg" 
+            alt="SixRun" @click="RunHit('Six',6)" />
         </v-col>
       </v-row>
     </v-container>
@@ -64,7 +64,7 @@
     </v-card>
     <v-card class="playerTwo">
     <v-card-title class="cardTitle">Computer</v-card-title>
-     <img v-if="gameKeys.computerRun" :src="gameKeys.computerRun" alt="runImg">
+     <img v-if="gameKeys.computerRun.str" :src="gameKeys.computerRun.str" alt="runImg">
     </v-card>
     <HangingBoard :data="gameKeys.propsData" @close-board="closeDialog"></HangingBoard>
   </v-layout>
@@ -74,45 +74,78 @@
 import HangingBoard from "./hangingBoard.vue"
 import {ref, onMounted} from 'vue';
 let gameKeys = ref({
-  scoredRun:'',
-  timer:null,
-  computerRun:'',
+  computerRun:{str:'',num:''},
+  gameStage:'',
   imagePath:'',
-  propsData:{open:false, part:''}
+  propsData:{open:false, part:''},
+  scoredRun:{str:'',num:null},
+  timer:null,
+  tossSelected:''
+
 })
 
 onMounted(() => {
-//  gameKeys.value.tossTime = true;
   gameKeys.value.propsData = {open:true, part:'toss'}
 
 })
 
-function RunHit(run=""){
-  // const emptyCard = setTimeout(()=>{
-  //     scoredRun.value = '';
-  //     clearTimeout(emptyCard);
-  // },10000)
-  gameKeys.value.scoredRun = run;
-  if (gameKeys.value.scoredRun!== '') {
-    gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun}.svg`,import.meta.url).href
+function RunHit(run,inNum){
+  if(gameKeys.value.gameStage !== 'toss'){
+      const emptyCard = setTimeout(()=>{
+        gameKeys.value.scoredRun.str = '';
+        clearTimeout(emptyCard);
+    },5000)
+  }
+  gameKeys.value.scoredRun = {str:run,num:inNum}
+  if (gameKeys.value.scoredRun.str !== '') {
+    gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun.str}.svg`,import.meta.url).href
   }
   displayComputerRun()
 }
 
 function displayComputerRun(){
-    gameKeys.value.timer = 3;
+    gameKeys.value.timer = 4;
     const timeEnds = setInterval(()=>{
         gameKeys.value.timer--
         if(gameKeys.value.timer == 0){
-          const runs = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
-          const runScored = runs[Math. floor(Math. random() * runs. length)];
-          gameKeys.value.computerRun = new URL(`../../assets/component Images/${runScored}.svg`,import.meta.url).href
+          const runs = [
+              {str:'Zero',num:0}, {str:'One',num:1}, 
+              {str:'Two',num:2}, {str:'Three',num:3}, 
+              {str:'Four',num:4}, {str:'Five',num:5}, {str:'Six',num:6}
+            ];
+          
+          const runScored = runs[Math.floor(Math.random() * runs.length)];
+          gameKeys.value.computerRun = {
+             str: new URL(`../../assets/component Images/${runScored.str}.svg`,import.meta.url).href,
+             num:runScored.num,
+          }
           clearInterval(timeEnds)
         }
     },1500)
+
+    checkRunandResult()
 }
 
-function closeDialog(){
+function checkRunandResult(){
+  let {computerRun,scoredRun,gameStage,tossSelected} = gameKeys.value;
+  const runs = computerRun.num + scoredRun.num;
+  if(gameStage == 'toss'){
+    const tossDecision = runs/2 ? 'Odd' : 'Even';
+    if(tossSelected == tossDecision){
+      gameKeys.value.propsData = {open:true,part:'tossWin'}
+    }
+    else{
+      const options = ['Bat','Bowl'];
+      const compSelection = options[Math.round(Math.random()*1)];
+      gameKeys.value.propsData = {open:true,part:'tossLose',result:compSelection};
+    }
+  }
+}
+
+function closeDialog(time,toss){
+   gameKeys.value.scoredRun.str = '';
+  gameKeys.value.gameStage = time;
+  gameKeys.value.tossSelected = toss;
   gameKeys.value.propsData = {open:false,part:''}
 }
 

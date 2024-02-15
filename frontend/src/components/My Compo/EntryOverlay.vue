@@ -1,14 +1,16 @@
 <template>
     <v-layout style=" background: rgb(129, 201, 252)">
-    <template v-if="playStarted">
         <v-card width="350" height="450" class="entryCard">
-            <v-text-field v-model="username" class="userNameInput"
+            <v-text-field
+                v-model="username" class="userNameInput"
                 :rules="[v => !!v.toString().trim() || 'Minimum 3 letters']"
                  density="comfortable" label="User Name" variant="outlined">
             </v-text-field>
             <v-card-actions class="cardActions">
-                <v-btn class="globalButton ml-2" @click="startPlay" :disabled="checkUserName"
-                prepend-icon="mdi-play-circle">
+                <v-btn
+                    class="globalButton ml-2" :disabled="checkUserName" 
+                    prepend-icon="mdi-play-circle"
+                    @click="startPlay">
                     Let's Play
                 </v-btn>
                 <v-btn class="globalButton mt-4"  prepend-icon="mdi-cog">
@@ -16,23 +18,19 @@
                 </v-btn>
             </v-card-actions>
         </v-card>
-    </template>
-    <template v-else>
-        <HandCricket></HandCricket>
-    </template>
     </v-layout>
 </template>
 
 <script setup>
 import { computed } from "vue";
-import HandCricket from "./playStadium.vue"
+import { useRouter } from 'vue-router'
 import { ref } from 'vue';
 
-let playStarted = ref(false);
+const router = useRouter();
 let username = ref('');
 
 function startPlay(){
-    playStarted.value = true;
+    router.push({path:'/gameStadium'})
 }
 
 const checkUserName = computed(()=>{
