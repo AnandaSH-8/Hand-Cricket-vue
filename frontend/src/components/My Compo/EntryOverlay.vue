@@ -10,10 +10,12 @@
                 <v-btn
                     class="globalButton ml-2" :disabled="checkUserName" 
                     prepend-icon="mdi-play-circle"
-                    @click="startPlay">
+                    @click="buttonActions('play')">
                     Let's Play
                 </v-btn>
-                <v-btn class="globalButton mt-4"  prepend-icon="mdi-cog">
+                <v-btn 
+                    class="globalButton mt-4"  prepend-icon="mdi-cog"
+                    @click="buttonActions('set')">
                     Settings &nbsp;
                 </v-btn>
             </v-card-actions>
@@ -29,8 +31,13 @@ import { ref } from 'vue';
 const router = useRouter();
 let username = ref('');
 
-function startPlay(){
-    router.push({path:'/gameStadium'})
+function buttonActions(action){
+    if (action == 'play') {
+        router.push({path:'/gameStadium'})
+    }
+    else{
+        router.push({path:'/gameSettings'})
+    }
 }
 
 const checkUserName = computed(()=>{

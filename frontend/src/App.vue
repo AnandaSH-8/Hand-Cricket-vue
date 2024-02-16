@@ -1,7 +1,7 @@
 <template>
   <v-layout style="margin-bottom: 2vh">
     <v-app-bar elevation="1" flat color="yellow-darken-3" rounded density="compact">
-      <v-app-bar-title style="cursor: pointer;" class="text-white" @click="$router.push('/')">Hand Cricket</v-app-bar-title>
+      <v-app-bar-title style="cursor: pointer;" class="text-white" @click="$router.push('/gameHome')">Hand Cricket</v-app-bar-title>
 
       <template v-slot:append>
         <v-btn
@@ -16,8 +16,14 @@
   <RouterView />
 </template>
 
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
+<script setup>
+import { onMounted } from 'vue';
+import { RouterView,useRouter } from 'vue-router'
+const router = useRouter();
+
+onMounted(()=>{
+  router.push({path:'/gameHome'})
+})
 </script>
 
 <style scoped>
