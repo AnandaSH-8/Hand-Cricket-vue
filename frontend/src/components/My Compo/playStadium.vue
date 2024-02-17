@@ -153,7 +153,7 @@ function closeDialog(time,toss){
 
 <style scoped>
 .HCbox {
-  background: rgb(129, 201, 252);
+  background: #81c9fc;
   height: 92vh;
   padding: 5vh 10%;
 }

@@ -3,12 +3,12 @@
     <v-app-bar elevation="1" flat color="yellow-darken-3" rounded density="compact">
       <v-app-bar-title style="cursor: pointer;" class="text-white" @click="$router.push('/gameHome')">Hand Cricket</v-app-bar-title>
 
-      <template v-slot:append>
+      <template #append>
         <v-btn
           color="white"
           size="x-large"
-          @click="$router.push('/vueHome')"
           icon="$vuetify"
+          @click="$router.push('/vueHome')"
         ></v-btn>
       </template>
     </v-app-bar>
