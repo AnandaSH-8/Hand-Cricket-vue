@@ -83,10 +83,8 @@ let gameKeys = ref({
   tossSelected:''
 
 })
-
 onMounted(() => {
   gameKeys.value.propsData = {open:true, part:'toss'}
-
 })
 
 function RunHit(run,inNum){
