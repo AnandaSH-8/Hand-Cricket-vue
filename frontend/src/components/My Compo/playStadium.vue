@@ -52,14 +52,6 @@
         <strong v-if="gameKeys.timer != null">{{ gameKeys.timer == 0 ? '' :gameKeys.timer }}</strong>
       </v-card-text>
       <v-card-actions class="stadiumActions">
-        <!-- <template v-if="gameKeys.tossTime"> 
-          <p>It's time for Toss! Choose any</p>
-          <v-btn class="tossBtn globalButton mr-6" @click="tossSelected('Odd')">Odd</v-btn>
-          <v-btn class="tossBtn globalButton" @click="tossSelected('Even')">Even</v-btn>
-        </template>
-        <template v-if="gameKeys.tossSelected">
-          <p>Great! You chose {{ gameKeys.tossSelected }}. Now click on any Hand Gesture for the Toss</p>
-        </template> -->
       </v-card-actions>
     </v-card>
     <v-card class="playerTwo">
