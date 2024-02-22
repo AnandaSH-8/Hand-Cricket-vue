@@ -26,12 +26,10 @@
 <script setup>
 import { computed } from "vue";
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from '@/stores/index'
 import { ref } from 'vue';
 
 const router = useRouter();
-const store = useGlobalStore();
-store.runLoader(true);
+
 let username = ref('');
 
 function buttonActions(action){

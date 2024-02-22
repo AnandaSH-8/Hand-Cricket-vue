@@ -14,11 +14,13 @@
     </v-app-bar>
   </v-layout>
   <RouterView />
+  <GameLoader/>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import { RouterView,useRouter } from 'vue-router'
+import GameLoader from "./global/loaderStyle.vue"
 const router = useRouter();
 
 onMounted(()=>{

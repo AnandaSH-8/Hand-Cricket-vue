@@ -65,6 +65,10 @@
 <script setup>
 import HangingBoard from "./hangingBoard.vue"
 import {ref, onMounted} from 'vue';
+import { useGlobalStore } from "@/stores";
+import { onBeforeMount } from "vue";
+
+const store = useGlobalStore();
 let gameKeys = ref({
   computerRun:{str:'',num:''},
   gameStage:'',
@@ -75,8 +79,12 @@ let gameKeys = ref({
   tossSelected:''
 
 })
+onBeforeMount(()=>{
+    store.runLoader(true);
+})
 onMounted(() => {
   gameKeys.value.propsData = {open:true, part:'toss'}
+  store.runLoader(false);
 })
 
 function RunHit(run,inNum){

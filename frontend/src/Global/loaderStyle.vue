@@ -1,7 +1,7 @@
 <template>
 		<v-dialog v-model="store.storeData.loader">
-				<main>
-				<svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+				<main class="text-center">
+				<svg class="loaderSVG" viewBox="0 0 256 128" width="100px" height="70px" xmlns="http://www.w3.org/2000/svg">
 				<defs>
 						<linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
 								<stop offset="0%" stop-color="#5ebd3e" />
@@ -62,10 +62,10 @@ body {
 main {
 	padding: 1.5em 0;
 }
-.ip {
-	width: 16em;
-	height: 8em;
-}
+/* .loaderSVG {
+	width: 100px;
+	height:;
+} */
 .ip__track {
 	stroke: hsl(var(--hue),90%,90%);
 	transition: stroke var(--trans-dur);
