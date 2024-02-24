@@ -37,35 +37,10 @@ const store = useGlobalStore();
 </script>
 
 <style scoped>
-* {
-	border: 0;
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-:root {
-	--hue: 223;
-	--bg: hsl(var(--hue),90%,95%);
-	--fg: hsl(var(--hue),90%,5%);
-	--trans-dur: 0.3s;
-	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
-}
-body {
-	background-color: var(--bg);
-	color: var(--fg);
-	font: 1em/1.5 sans-serif;
-	height: 100vh;
-	display: grid;
-	place-items: center;
-	transition: background-color var(--trans-dur);
-}
 main {
 	padding: 1.5em 0;
 }
-/* .loaderSVG {
-	width: 100px;
-	height:;
-} */
+
 .ip__track {
 	stroke: hsl(var(--hue),90%,90%);
 	transition: stroke var(--trans-dur);

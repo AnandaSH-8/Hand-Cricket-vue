@@ -84,10 +84,10 @@ onBeforeMount(()=>{
 })
 onMounted(() => {
   gameKeys.value.propsData = {open:true, part:'toss'}
-  store.runLoader(false);
 })
 
 function RunHit(run,inNum){
+  store.runLoader(true);
   if(gameKeys.value.gameStage !== 'toss'){
       const emptyCard = setTimeout(()=>{
         gameKeys.value.scoredRun.str = '';
@@ -138,6 +138,7 @@ function checkRunandResult(){
       gameKeys.value.propsData = {open:true,part:'tossLose',result:compSelection};
     }
   }
+   store.runLoader(false);
 }
 
 function closeDialog(time,toss){

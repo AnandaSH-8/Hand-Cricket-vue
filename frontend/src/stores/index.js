@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('store',() => {
   const storeData = ref({
-    loader:false
+    loader:true
   })
 
   function runLoader(value){

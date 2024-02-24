@@ -38,12 +38,14 @@
     </v-dialog>
 </template>
 <script setup>
+import { useGlobalStore } from '@/stores';
 import { ref,watch } from 'vue';
 import { useRouter } from 'vue-router'
 const props = defineProps({
 	data:Object
 })
 const router = useRouter();
+const store = useGlobalStore();
 const emit = defineEmits(['closeBoard'])
 
 const board = ref({
@@ -54,8 +56,9 @@ const board = ref({
 watch(() => props.data,
   (value) => {
     if(value){
-			 board.value = value;
-		}
+		board.value = value;
+	}
+	store.runLoader(false);
   })
 	
 function tossSelected(toss){
