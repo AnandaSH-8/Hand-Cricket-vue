@@ -35,8 +35,10 @@
 import { useGlobalStore } from '@/stores/index'
 const store = useGlobalStore();
 </script>
-
 <style scoped>
+.v-overlay{
+	z-index: 10000
+}
 main {
 	padding: 1.5em 0;
 }
