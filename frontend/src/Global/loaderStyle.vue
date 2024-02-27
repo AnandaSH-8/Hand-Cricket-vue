@@ -38,8 +38,8 @@ import { useGlobalStore } from '@/stores/index'
 const store = useGlobalStore();
 </script>
 <style scoped>
-.v-overlay {
-	z-index: 10000
+.v-overlay, .v-overlay__scrim {
+	z-index: 100000;
 }
 
 main {

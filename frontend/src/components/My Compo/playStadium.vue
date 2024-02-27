@@ -48,7 +48,24 @@
       </v-row>
     </v-container>
     <v-card class="stadiumDesign">
-      <v-card-text>
+      <v-card-text class="scoreCard">
+          <v-row>
+            <b>You won the toss and Chose to Bowl first</b>
+          </v-row>
+          <v-row>
+            <v-col>Balls : 30</v-col>
+            <v-col>Wicket : 1</v-col>
+          </v-row>
+          <v-row>
+            <v-col>Batting : You</v-col>
+            <v-col>name : You</v-col>
+            <v-col>Runs : 15</v-col>
+          </v-row>
+          <v-row>
+            <v-col>Bowling : Computer</v-col>
+            <v-col>name : Computer</v-col>
+            <v-col>Bowls : 6</v-col>
+          </v-row>
         <strong v-if="gameKeys.timer != null">{{ gameKeys.timer == 0 ? '' :gameKeys.timer }}</strong>
       </v-card-text>
       <v-card-actions class="stadiumActions">
@@ -235,11 +252,14 @@ function closeDialog(time,toss){
 
 .stadiumDesign  strong{
   font-size: 50px;
-  /* color:#f9b851; */
   z-index: 100;
 }
 
 .playerTwo{
   background: #76B438;
+}
+
+.scoreCard{
+  margin:5%;
 }
 </style>

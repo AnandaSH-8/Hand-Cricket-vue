@@ -91,8 +91,9 @@ function quitRestart(restart){
 </script>
 <style scoped>
 .v-overlay{
-	z-index: 1000
-}	.boardCard{
+	z-index: 100
+}	
+.boardCard{
 		margin:auto;
 		width: 380px;
 		height: 300px;;
