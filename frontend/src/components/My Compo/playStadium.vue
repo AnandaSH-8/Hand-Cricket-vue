@@ -48,7 +48,7 @@
       </v-row>
     </v-container>
     <v-card class="stadiumDesign">
-      <v-card-text class="scoreCard">
+      <v-card-text v-if="gameKeys.gameStage == 'game'" class="scoreCard">
           <v-row>
             <b>You won the toss and Chose to Bowl first</b>
           </v-row>
@@ -155,11 +155,15 @@ function checkRunandResult(){
       gameKeys.value.propsData = {open:true,part:'tossLose',result:compSelection};
     }
   }
+  else if (gameStage == 'game'){
+    //
+  }
    store.runLoader(false);
 }
 
 function closeDialog(time,toss){
-   gameKeys.value.scoredRun.str = '';
+  gameKeys.value.scoredRun.str = '';
+  gameKeys.value.computerRun.str = '';
   gameKeys.value.gameStage = time;
   gameKeys.value.tossSelected = toss;
   gameKeys.value.propsData = {open:false,part:''}

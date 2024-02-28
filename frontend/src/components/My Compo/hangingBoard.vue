@@ -10,7 +10,7 @@
 					<template v-if="board.part == 'tossKey'">
 						<p class="boardTitle">Great! You chose <strong>{{ board.toss }}</strong>; <br>
 						 Now click on any Hand Gesture for the Toss</p>
-						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard">Ok</v-btn>
+						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard(true,'toss')">Ok</v-btn>
 					</template>
 					<template v-if="board.part == 'tossWin'">
 						<p class="boardTitle">Congratulations! You've won the toss; 
@@ -20,12 +20,19 @@
 						<v-btn size="small" class="tossBtn globalButton" @click="optionSelection('Bat')">Bat</v-btn>
 						<v-btn size="small" class="tossBtn globalButton" @click="optionSelection('Bowl')">Bowl</v-btn>
 					</template>
+					<template v-if="board.part == 'tossLose'">
+						<p class="boardTitle">Bad Luck! Computer won the toss 
+							<br>
+							and decided to {{ board.result }} first!
+						</p>
+						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard(true,'game')">Ok</v-btn>
+					</template>
 					<template v-if="board.part == 'gamePlan'">
 						<p class="boardTitle">Great! You chose to <strong>{{ board.opt }}</strong>;
 						 	<br>
 							Let's Start the Game. Are you Ready?
 						</p>
-						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard(true)">Yes</v-btn>
+						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard(true,'game')">Yes</v-btn>
 						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard(false)">No</v-btn>
 					</template>
 					<template v-if="board.part == 'restart'">
@@ -65,10 +72,10 @@ function tossSelected(toss){
 	board.value = {open:true,part:'tossKey',toss}
 }
 
-function closeBoard(result){
+function closeBoard(result,value){
 	if(result){
 		board.value.open = false;
-		emit('closeBoard','toss',board.value.toss);
+		emit('closeBoard',value);
 	}
 	else{
 		board.value = {open:true,part:'restart'}
