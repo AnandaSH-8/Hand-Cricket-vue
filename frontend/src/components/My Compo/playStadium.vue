@@ -48,20 +48,20 @@
       </v-row>
     </v-container>
     <v-card class="stadiumDesign">
-      <v-card-text v-if="gameKeys.gameStage == 'game'" class="scoreCard">
-          <v-row>
+      <v-card-text  class="scoreCard"> <!--v-if="gameKeys.gameStage == 'game'"-->
+          <v-row class="scoredCard-firstRow">
             <b>You won the toss and Chose to Bowl first</b>
           </v-row>
-          <v-row>
+          <v-row class="scoredCard-secondRow">
             <v-col>Balls : 30</v-col>
             <v-col>Wicket : 1</v-col>
           </v-row>
-          <v-row>
+          <v-row class="scoredCard-thirdRow">
             <v-col>Batting : You</v-col>
             <v-col>name : You</v-col>
             <v-col>Runs : 15</v-col>
           </v-row>
-          <v-row>
+          <v-row class="scoredCard-fourthRow">
             <v-col>Bowling : Computer</v-col>
             <v-col>name : Computer</v-col>
             <v-col>Bowls : 6</v-col>
@@ -264,6 +264,48 @@ function closeDialog(time,toss){
 }
 
 .scoreCard{
-  margin:5%;
+  margin:3%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 10px;
+  background-color: #f9b851;
+  color:white;
+  padding:1%;
+}
+
+.scoreCard > :deep(.v-row){
+  border-radius: 10px;
+   margin: 0;
+   margin-top: 5px;
+}
+
+.scoredCard-firstRow{
+  margin-top: 0 !important;
+  place-content: center;
+  background-color: #76B438;
+  /* margin-bottom: 1px; */
+}
+
+.scoredCard-secondRow{
+  background-color: #81c9fc;
+  font-size: 18px;
+}
+
+.scoredCard-secondRow .v-col{
+  /* border:1px solid green; */
+  width:50%;
+}
+.scoredCard-thirdRow{
+ /* border:1px solid blue; */
+}
+.scoredCard-thirdRow .v-col{
+  /* border:1px solid green; */
+}
+.scoredCard-fourthRow{
+ /* border:1px solid blue; */
+}
+
+.scoredCard-fourthRow .v-col{
+  /* border:1px solid green; */
+  width:50%;
 }
 </style>
