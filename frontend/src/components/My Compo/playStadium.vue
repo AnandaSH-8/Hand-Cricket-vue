@@ -57,14 +57,19 @@
             <v-col>Wicket : 1</v-col>
           </v-row>
           <v-row class="scoredCard-thirdRow">
-            <v-col>Batting : You</v-col>
-            <v-col>name : You</v-col>
-            <v-col>Runs : 15</v-col>
+            <v-col class="px-2" cols="5"><b>Batting:</b>computer</v-col>
+            <v-col class="px-0" cols="4"><b>name:</b> player five</v-col>
+            <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> 888</v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
-            <v-col>Bowling : Computer</v-col>
-            <v-col>name : Computer</v-col>
-            <v-col>Bowls : 6</v-col>
+            <v-col class="px-2" cols="5">Bowling : Computer</v-col>
+            <v-col class="px-0" cols="4">name : Computer</v-col>
+            <v-col class="px-0 pl-2" cols="3">Bowls : 6</v-col>
+          </v-row>
+          <v-row class="scoredCard-lastRow">
+            <v-col class="py-1 px-2">
+              <v-icon color="white" icon="mdi-information-outline"></v-icon>
+            </v-col>
           </v-row>
         <strong v-if="gameKeys.timer != null">{{ gameKeys.timer == 0 ? '' :gameKeys.timer }}</strong>
       </v-card-text>
@@ -252,6 +257,7 @@ function closeDialog(time,toss){
   width: 40%;
   margin: 0 7%;
    color: #f9b851;
+   background-color: #76B438;
 }
 
 .stadiumDesign  strong{
@@ -267,45 +273,64 @@ function closeDialog(time,toss){
   margin:3%;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 10px;
-  background-color: #f9b851;
+  /* background-color: #f9b851; */
+  /* background-color: #76B438; */
+    background-color: #81c9fc;
   color:white;
   padding:1%;
 }
 
 .scoreCard > :deep(.v-row){
   border-radius: 10px;
-   margin: 0;
+   margin: auto;
    margin-top: 5px;
 }
 
 .scoredCard-firstRow{
   margin-top: 0 !important;
   place-content: center;
-  background-color: #76B438;
-  /* margin-bottom: 1px; */
+  /* background-color: #76B438; */
+  /* background-color: #f9b851; */
 }
 
 .scoredCard-secondRow{
-  background-color: #81c9fc;
-  font-size: 18px;
+  /* background-color: #81c9fc; */
+  /* background-color: #76B438; */
+  background-color: #f9b851;
+  font-size: 17px;
+  width: 80%;
 }
 
 .scoredCard-secondRow .v-col{
-  /* border:1px solid green; */
+padding:4px;
+padding-left: 5%;
   width:50%;
 }
 .scoredCard-thirdRow{
  /* border:1px solid blue; */
+ background-color: #76B438;
+ /* background-color: #f9b851; */
 }
 .scoredCard-thirdRow .v-col{
+  padding-top: 5px;
+  padding-bottom: 5px;
   /* border:1px solid green; */
 }
 .scoredCard-fourthRow{
  /* border:1px solid blue; */
+   /* background-color: #81c9fc; */
+   background-color: #f9b851;
 }
 
 .scoredCard-fourthRow .v-col{
-  /* border:1px solid green; */
-  width:50%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.scoredCard-lastRow{
+ width: 10%;
+ position: relative;
+ left:43%;
+ background-color: gold;
 }
 </style>
