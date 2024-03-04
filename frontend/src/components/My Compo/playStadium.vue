@@ -66,9 +66,9 @@
             <v-col class="px-0" cols="4">name : Computer</v-col>
             <v-col class="px-0 pl-2" cols="3">Bowls : 6</v-col>
           </v-row>
-          <v-row class="scoredCard-lastRow">
-            <v-col class="py-1 px-2">
-              <v-icon color="white" icon="mdi-information-outline"></v-icon>
+          <v-row data-toggle="tooltip" title="Full Scorecard" class="scoredCard-lastRow">
+            <v-col class="infoIconBox pa-0">
+              <v-icon size="x-small" color="white" icon="mdi-information-outline"></v-icon>
             </v-col>
           </v-row>
         <strong v-if="gameKeys.timer != null">{{ gameKeys.timer == 0 ? '' :gameKeys.timer }}</strong>
@@ -328,9 +328,17 @@ padding-left: 5%;
 }
 
 .scoredCard-lastRow{
- width: 10%;
+ width:6%;
+ height:20px;
  position: relative;
- left:43%;
+ left:45%;
+ cursor: pointer;
  background-color: gold;
+}
+
+.infoIconBox > *{
+  position:absolute;
+  top:3.5px;
+  left:3px;
 }
 </style>
