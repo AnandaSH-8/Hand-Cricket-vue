@@ -66,11 +66,20 @@
             <v-col class="px-0" cols="4">name : Computer</v-col>
             <v-col class="px-0 pl-2" cols="3">Bowls : 6</v-col>
           </v-row>
-          <v-row data-toggle="tooltip" title="Full Scorecard" class="scoredCard-lastRow">
+          <v-row class="scoredCard-lastRow">
             <v-col class="infoIconBox pa-0">
-              <v-icon size="x-small" color="white" icon="mdi-information-outline"></v-icon>
+              <v-menu>
+               <template #activator="{ props }">
+                  <v-icon size="x-small" color="white" v-bind="props" icon="mdi-information-outline"></v-icon>
+               </template>
+               <v-list>
+                <kbd>Scorecard details</kbd>
+               </v-list>
+              </v-menu>
+              <span class="tooltip">Full Scorecard</span>
             </v-col>
           </v-row>
+          <v-card></v-card>
         <strong v-if="gameKeys.timer != null">{{ gameKeys.timer == 0 ? '' :gameKeys.timer }}</strong>
       </v-card-text>
       <v-card-actions class="stadiumActions">
@@ -273,9 +282,7 @@ function closeDialog(time,toss){
   margin:3%;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 10px;
-  /* background-color: #f9b851; */
-  /* background-color: #76B438; */
-    background-color: #81c9fc;
+  background-color: #81c9fc;
   color:white;
   padding:1%;
 }
@@ -289,13 +296,9 @@ function closeDialog(time,toss){
 .scoredCard-firstRow{
   margin-top: 0 !important;
   place-content: center;
-  /* background-color: #76B438; */
-  /* background-color: #f9b851; */
 }
 
 .scoredCard-secondRow{
-  /* background-color: #81c9fc; */
-  /* background-color: #76B438; */
   background-color: #f9b851;
   font-size: 17px;
   width: 80%;
@@ -307,18 +310,13 @@ padding-left: 5%;
   width:50%;
 }
 .scoredCard-thirdRow{
- /* border:1px solid blue; */
  background-color: #76B438;
- /* background-color: #f9b851; */
 }
 .scoredCard-thirdRow .v-col{
   padding-top: 5px;
   padding-bottom: 5px;
-  /* border:1px solid green; */
 }
 .scoredCard-fourthRow{
- /* border:1px solid blue; */
-   /* background-color: #81c9fc; */
    background-color: #f9b851;
 }
 
@@ -338,7 +336,38 @@ padding-left: 5%;
 
 .infoIconBox > *{
   position:absolute;
-  top:3.5px;
+  top:3px;
   left:3px;
+}
+
+
+.tooltip{
+  visibility: hidden;
+}
+.tooltip::before{
+  content:'';
+  padding:9px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  z-index: -1;
+  transform: rotate(45deg);
+  top:3px;
+  right: -4px;
+}
+ .infoIconBox:hover .tooltip{
+  visibility: visible;
+  width:90px;
+  height: 25px;
+  position: absolute;
+  background-color: white;
+  left:-100px;
+  top:-2px;
+  z-index: 1;
+  color:black;
+  font-size: 12px;
+  border-radius: 3px;
+  display: flex;
+  place-items: center;
+  place-content: center;
 }
 </style>
