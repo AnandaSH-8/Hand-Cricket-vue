@@ -73,7 +73,8 @@
                   <v-icon size="x-small" color="white" v-bind="props" icon="mdi-information-outline"></v-icon>
                </template>
                <v-list>
-                <kbd>Scorecard details</kbd>
+                <kbd>Scorecard details
+                </kbd>
                </v-list>
               </v-menu>
               <span class="tooltip">Full Scorecard</span>
