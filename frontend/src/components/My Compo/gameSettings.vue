@@ -12,12 +12,13 @@
                     <b>Batting</b>
                     <v-row class="pt-2">
                         <v-col class="py-1" cols="1"></v-col>
-                        <v-col cols="4" class="bat-options py-1">
+                        <v-col cols="4" class="ballWicks py-1">
                         <kbd>Wickets: </kbd>
-                            <v-select :items="[1,2,3,4,5,10]" density="compact" variant="outlined"/>
+                            <v-select v-model="settingData.wickets" :items="[1,2,3,4,5,10]" density="compact" variant="outlined"/>
                         </v-col>
                         <v-col cols="7" class="py-1 ">
-                            <v-switch label="Batting" color="#81c9fc" density="compact" inset></v-switch>
+                            <v-switch v-model="settingData.battingSelected" label="Batting" color="#81c9fc" density="compact" inset>
+                            </v-switch>
                             <v-icon class="setting-infoIcon" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
                              <span class="tooltip">If Batting only selected, you have to chase the set run in 30 balls.<section></section> </span>
                         </v-col>
@@ -28,13 +29,16 @@
                     <b>Bowling</b>
                     <v-row class="pt-2">
                         <v-col cols="1" class="py-1"></v-col>
-                        <v-col cols="4" class="bowl-options py-1">
+                        <v-col cols="4" class="ballWicks py-1">
                         <kbd>Balls:</kbd>
-                            <v-text-field type="number"
-                                density="compact" variant="outlined"></v-text-field>
+                            <v-select :items="[6,12,18,30,60,100,120]" v-model="settingData.balls"
+                                density="compact" variant="outlined"></v-select>
                         </v-col>
                         <v-col cols="7" class="py-1">
-                            <v-switch  label="Bowling"  color="#81c9fc" density="compact" inset></v-switch>
+                            <v-switch 
+                                v-model="settingData.bowlingSelected"
+                              label="Bowling"  color="#81c9fc" density="compact" inset>
+                            </v-switch>
                             <v-icon class="setting-infoIcon" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
                              <span class="tooltip">If Bowling only selected, you have to restrict the opponent before reaches the set run in 30 balls.</span>
                         </v-col>
@@ -47,7 +51,14 @@
 </template>
 
 <script setup>
+import {ref} from 'vue';
 
+let settingData = ref({
+    battingSelected:true,
+    bowlingSelected:true,
+    balls:0,
+    wickets:1,
+})
 </script>
 
 <style scoped>
@@ -112,13 +123,12 @@
     font-size: 18px;
 }
 
-.bat-options, .bowl-options{
+.ballWicks{
     display: flex;
     justify-content: space-between;
 }
 
-:deep(.bat-options .v-input--density-compact),
-:deep(.bowl-options .v-input--density-compact){
+:deep(.ballWicks .v-input--density-compact){
     max-width:70px !important;
     height: 28px;
     color:black;
@@ -126,12 +136,11 @@
     background-color:rgb(247, 244, 244);
 }
 
-:deep(.bat-options .v-field__field),
-:deep(.bowl-options .v-field.v-field){
+:deep(.ballWicks .v-field__field){
     height: 28px;
 }
 
-:deep(.battingContainer .v-select .v-field.v-field)
+:deep(.ballWicks .v-select .v-field.v-field)
 {
     padding:0;   
 }
@@ -139,25 +148,12 @@
 .settings :deep(.v-field__input), :deep(.v-select .v-select__selection-text){
     min-height: 25px;
     padding: 0;
-    padding-left: 10px;
+    padding-left: 5px;
     font-weight: 900;
 }
 .settings :deep(.v-text-field .v-field--no-label input){
     padding-left:0;
-    min-height:25px;
-    text-align: center;
-    
-}
-
-:deep(.bowl-options input::-webkit-outer-spin-button),
-:deep(.bowl-options input::-webkit-inner-spin-button){
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-:deep(.bowl-options input[type=number]){
-  -moz-appearance: textfield;
+    min-height:25px;    
 }
 
 :deep(.v-switch--inset){
