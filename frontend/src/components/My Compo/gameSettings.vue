@@ -1,6 +1,6 @@
 <template>
     <v-layout class="settings">
-        <v-card>
+        <v-card height="439">
             <v-card-item>
                 <v-card-title class="settingTitle">
                     <v-icon color="#76B438">mdi-keyboard-backspace</v-icon>
@@ -8,24 +8,35 @@
                     Settings                </v-card-title>
             </v-card-item>
             <v-card-text>
-                <v-container class="pt-0 battingContainer"> 
+                <v-container class="battingContainer"> 
                     <b>Batting</b>
                     <v-row class="pt-2">
-                        <v-col cols="1"></v-col>
-                        <v-col cols="4" class="bat-options">
-                        <kbd>Wickets</kbd>
-                        <v-select :items="[1,2,3,4,5,10]" density="compact" variant="solo"/>
+                        <v-col class="py-1" cols="1"></v-col>
+                        <v-col cols="4" class="bat-options py-1">
+                        <kbd>Wickets: </kbd>
+                            <v-select :items="[1,2,3,4,5,10]" density="compact" variant="outlined"/>
+                        </v-col>
+                        <v-col cols="7" class="py-1 ">
+                            <v-switch label="Batting" color="#81c9fc" density="compact" inset></v-switch>
+                            <v-icon class="setting-infoIcon" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
+                             <span class="tooltip">If Batting only selected, you have to chase the set run in 30 balls.<section></section> </span>
                         </v-col>
                     </v-row>
                 </v-container>  
-                <hr>
-                <v-container class="pt-0 bowlingContainer" > 
+                <hr style="border:1.5px groove;">
+                <v-container class="bowlingContainer" > 
                     <b>Bowling</b>
                     <v-row class="pt-2">
-                        <v-col cols="1"></v-col>
-                        <v-col cols="4" class="bowl-options">
-                        <kbd>Balls</kbd>
-                            <v-text-field density="compact" variant="solo"></v-text-field>
+                        <v-col cols="1" class="py-1"></v-col>
+                        <v-col cols="4" class="bowl-options py-1">
+                        <kbd>Balls:</kbd>
+                            <v-text-field type="number"
+                                density="compact" variant="outlined"></v-text-field>
+                        </v-col>
+                        <v-col cols="7" class="py-1">
+                            <v-switch  label="Bowling"  color="#81c9fc" density="compact" inset></v-switch>
+                            <v-icon class="setting-infoIcon" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
+                             <span class="tooltip">If Bowling only selected, you have to restrict the opponent before reaches the set run in 30 balls.</span>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -48,7 +59,6 @@
     width:50vw;
     margin: auto;
     margin-top: 8vh;
-    height: 75vh;
     color:white;
     margin-bottom: 9vh;
     background-color: #f9b851;
@@ -88,6 +98,16 @@
     }
 }
 
+.battingContainer, .bowlingContainer{
+    background-color:#76B438;
+    border-radius: 2px;
+}
+
+.battingContainer .v-col,
+.bowlingContainer .v-col {
+    place-items: center;
+}
+
 .battingContainer > b, .bowlingContainer > b{
     font-size: 18px;
 }
@@ -99,13 +119,103 @@
 
 :deep(.bat-options .v-input--density-compact),
 :deep(.bowl-options .v-input--density-compact){
-    max-width:100px !important;
-    height: 25px;
+    max-width:70px !important;
+    height: 28px;
+    color:black;
+    border-radius: 5px;
+    background-color:rgb(247, 244, 244);
 }
 
 :deep(.bat-options .v-field__field),
-:deep(.bowl-options .v-field__field){
-    height: 25px;
+:deep(.bowl-options .v-field.v-field){
+    height: 28px;
 }
 
+:deep(.battingContainer .v-select .v-field.v-field)
+{
+    padding:0;   
+}
+
+.settings :deep(.v-field__input), :deep(.v-select .v-select__selection-text){
+    min-height: 25px;
+    padding: 0;
+    padding-left: 10px;
+    font-weight: 900;
+}
+.settings :deep(.v-text-field .v-field--no-label input){
+    padding-left:0;
+    min-height:25px;
+    text-align: center;
+    
+}
+
+:deep(.bowl-options input::-webkit-outer-spin-button),
+:deep(.bowl-options input::-webkit-inner-spin-button){
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+:deep(.bowl-options input[type=number]){
+  -moz-appearance: textfield;
+}
+
+:deep(.v-switch--inset){
+    height:40px;
+    width:130px;
+    float: right;
+}
+
+:deep(.v-switch--inset .v-switch__track){
+    height:20px;
+}
+
+:deep(.v-switch--inset .v-selection-control--dirty .v-switch__thumb){
+    width:20px;
+    height:20px;
+}
+
+:deep(.v-switch--inset .v-selection-control--dirty .v-switch__thumb)::before{
+    color:#787878;
+    content:'Yes';
+    font-size: 7px;
+    font-weight: 800;
+}
+
+.setting-infoIcon{
+    position: absolute;
+    right:22px;
+    transform: translateY(15px);
+    cursor: pointer;
+}
+
+.setting-infoIcon:hover + .tooltip{
+    visibility: visible;
+    background-color: rgb(236, 234, 234);
+    width:280px;
+    height:38px;
+    position: absolute;
+    right: 20px;
+    border-radius: 10px;
+    transform: translateY(-32px);
+    color:rgb(101, 101, 101);
+    padding-left: 5px;
+    padding-top: 4px;
+    font-size: 12px;
+    line-height: 15px;
+}
+.tooltip{
+  visibility: hidden;
+  position:absolute;
+}
+.tooltip::before{
+  content:'';
+  padding:15px;
+  background-color: rgb(236, 234, 234);
+  z-index:-10;
+  position: absolute;
+  transform: rotate(20deg);
+  right: 6px;
+  bottom: -3px;
+}
 </style>
