@@ -112,14 +112,14 @@ let gameKeys = ref({
 
 })
 onBeforeMount(()=>{
-    store.runLoader(true);
+    store.setActions(true,'loader');
 })
 onMounted(() => {
   gameKeys.value.propsData = {open:true, part:'toss'}
 })
 
 function RunHit(run,inNum){
-  store.runLoader(true);
+  store.setActions(true,'loader');
   if(gameKeys.value.gameStage !== 'toss'){
       const emptyCard = setTimeout(()=>{
         gameKeys.value.scoredRun.str = '';
@@ -173,7 +173,7 @@ function checkRunandResult(){
   else if (gameStage == 'game'){
     //
   }
-   store.runLoader(false);
+   store.setActions(false,'loader');
 }
 
 function closeDialog(time,toss){

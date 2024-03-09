@@ -3,13 +3,23 @@ import { defineStore } from 'pinia'
 
 
 export const useGlobalStore = defineStore('store',() => {
-  const storeData = ref({
-    loader:false
+  const setData = ref({
+    loader:false,
+    settings:null
   })
 
-  function runLoader(value){
-    storeData.value.loader = value;
+  function setActions(value,from){
+    switch (from) {
+      case 'loader':{
+          setData.value.loader = value;
+        break;
+      }
+      case 'setting':{
+          setData.value.settings = value;
+        break;
+      }
+    }
   }
 
-  return {runLoader,storeData};
+  return {setActions,setData};
 })

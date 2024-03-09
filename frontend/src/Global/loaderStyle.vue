@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="store.storeData.loader">
+	<v-dialog v-model="store.setData.loader">
 		<main class="text-center">
 			<svg class="loaderSVG" viewBox="0 0 256 128" width="100px" height="70px" xmlns="http://www.w3.org/2000/svg">
 				<defs>

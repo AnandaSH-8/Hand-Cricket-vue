@@ -3,7 +3,7 @@
         <v-card height="439">
             <v-card-item>
                 <v-card-title class="settingTitle">
-                    <v-icon color="#76B438">mdi-keyboard-backspace</v-icon>
+                    <v-icon color="#76B438" @click="router.back()" >mdi-keyboard-backspace</v-icon>
                     <v-icon id="settingIcon" color="#76B438">mdi-cog</v-icon>
                     Settings                </v-card-title>
             </v-card-item>
@@ -30,8 +30,10 @@
                     <v-row class="pt-2">
                         <v-col cols="1" class="py-1"></v-col>
                         <v-col cols="4" class="ballWicks py-1">
-                        <kbd>Balls:</kbd>
-                            <v-select :items="[6,12,18,30,60,100,120]" v-model="settingData.balls"
+                        <kbd>Balls:<v-icon class="ballsInfo" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
+                            <span class="balls-tooltip">If 0 ball selected, then it is considered as Infinity balls</span>
+                        </kbd>
+                            <v-select :items="[0,6,12,18,30,60,100,120]" v-model="settingData.balls"
                                 density="compact" variant="outlined"></v-select>
                         </v-col>
                         <v-col cols="7" class="py-1">
@@ -40,18 +42,26 @@
                               label="Bowling"  color="#81c9fc" density="compact" inset>
                             </v-switch>
                             <v-icon class="setting-infoIcon" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
-                             <span class="tooltip">If Bowling only selected, you have to restrict the opponent before reaches the set run in 30 balls.</span>
+                            <span class="tooltip">If Bowling only selected, you have to restrict the opponent before reaches the set run in 30 balls.</span>
                         </v-col>
                     </v-row>
                 </v-container>
                 <hr>
             </v-card-text>
+            <v-card-actions>
+                <v-btn class="globalButton ma-auto mt-15" @click="saveSettings" >Save</v-btn>
+            </v-card-actions>
         </v-card>
     </v-layout>
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import { useGlobalStore } from '@/stores';
+import {ref,onMounted} from 'vue';
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
+const store = useGlobalStore();
 
 let settingData = ref({
     battingSelected:true,
@@ -59,6 +69,18 @@ let settingData = ref({
     balls:0,
     wickets:1,
 })
+
+onMounted(()=>{
+    if(store.setData.settings){
+        settingData.value = store.setData.settings;
+    }
+})
+
+function saveSettings(){
+    store.setActions(settingData,'setting');
+    router.back();
+}
+
 </script>
 
 <style scoped>
@@ -183,6 +205,38 @@ let settingData = ref({
     right:22px;
     transform: translateY(15px);
     cursor: pointer;
+}
+
+.ballsInfo{
+    cursor: pointer;
+}
+
+.ballsInfo:hover + .balls-tooltip{
+    visibility: visible;
+    width:220px;
+    height:45px;
+    padding:2px;
+    color:rgb(101, 101, 101);
+    border-radius: 10px;
+    font-size: 12px;
+    transform: translate(-30px,30px);
+    background-color: rgb(236, 234, 234);
+    z-index: 1000 !important;
+}
+
+.balls-tooltip{
+  visibility: hidden;
+  position:absolute;
+}
+.balls-tooltip::before{
+  content:'';
+  padding:8px;
+  background-color: rgb(236, 234, 234);
+  z-index:-10;
+  position: absolute;
+  transform: rotate(45deg);
+  left: 15px;
+  top:-8px;
 }
 
 .setting-infoIcon:hover + .tooltip{

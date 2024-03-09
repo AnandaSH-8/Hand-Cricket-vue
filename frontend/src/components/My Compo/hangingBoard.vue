@@ -65,7 +65,7 @@ watch(() => props.data,
     if(value){
 		board.value = value;
 	}
-	store.runLoader(false);
+	store.setActions(false,'loader');
   })
 	
 function tossSelected(toss){
