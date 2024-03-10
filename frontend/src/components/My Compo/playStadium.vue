@@ -48,22 +48,23 @@
       </v-row>
     </v-container>
     <v-card class="stadiumDesign">
-      <v-card-text  class="scoreCard"> <!--v-if="gameKeys.gameStage == 'game'"-->
+      <v-card-text v-if="gameKeys.gameStage == 'game'"  class="scoreCard">
           <v-row class="scoredCard-firstRow">
-            <b>You won the toss and Chose to Bowl first</b>
+            <b>{{gameKeys.tossMsg}}</b>
           </v-row>
           <v-row class="scoredCard-secondRow">
-            <v-col>Balls : 30</v-col>
-            <v-col>Wicket : 1</v-col>
+            <v-col>Balls : {{store.setData.settings.balls ? store.setData.settings.balls : '∞'}}</v-col>
+            <v-col>{{store.setData.settings.wickets > 1 ? `Wickets : ${store.setData.settings.wickets}` : 
+                `Wicket : ${store.setData.settings.wickets}`}}</v-col>
           </v-row>
           <v-row class="scoredCard-thirdRow">
-            <v-col class="px-2" cols="5"><b>Batting:</b>computer</v-col>
-            <v-col class="px-0" cols="4"><b>name:</b> player five</v-col>
+            <v-col class="px-2" cols="5"><b>Batting:</b>{{battingPlayer}}</v-col>
+            <v-col class="px-0" cols="4"><b>name:</b> {{battingPlayer}}</v-col>
             <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> 888</v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
-            <v-col class="px-2" cols="5">Bowling : Computer</v-col>
-            <v-col class="px-0" cols="4">name : Computer</v-col>
+            <v-col class="px-2" cols="5">Bowling : {{bowlingPlayer}}</v-col>
+            <v-col class="px-0" cols="4">name : {{bowlingPlayer}}</v-col>
             <v-col class="px-0 pl-2" cols="3">Bowls : 6</v-col>
           </v-row>
           <v-row class="scoredCard-lastRow">
@@ -108,7 +109,11 @@ let gameKeys = ref({
   propsData:{open:false, part:''},
   scoredRun:{str:'',num:null},
   timer:null,
-  tossSelected:''
+  tossSelected:'',
+  tossResult:'',
+  tossMsg:null,
+  battingPlayer:"",
+  bowlingPlayer:'',
 
 })
 onBeforeMount(()=>{
@@ -162,11 +167,13 @@ function checkRunandResult(){
   if(gameStage == 'toss'){
     const tossDecision = runs/2 ? 'Odd' : 'Even';
     if(tossSelected == tossDecision){
+      gameKeys.value.tossResult = 'win';
       gameKeys.value.propsData = {open:true,part:'tossWin'}
     }
     else{
       const options = ['Bat','Bowl'];
       const compSelection = options[Math.round(Math.random()*1)];
+      gameKeys.value.tossResult = compSelection;
       gameKeys.value.propsData = {open:true,part:'tossLose',result:compSelection};
     }
   }
@@ -181,6 +188,23 @@ function closeDialog(time,toss){
   gameKeys.value.computerRun.str = '';
   gameKeys.value.gameStage = time;
   gameKeys.value.tossSelected = toss;
+  if(time == 'game'){
+    if(gameKeys.value.tossResult == 'win'){
+      gameKeys.value.battingPlayer = 'You';
+      gameKeys.value.bowlingPlayer = 'Computer';
+      gameKeys.value.tossMsg = store.setData.tossWinMsg;
+    }
+    else{
+      gameKeys.value.tossMsg = `Computer won the toss and decided to ${gameKeys.value.tossResult} first`;
+      if(gameKeys.value.tossResult == 'Bat'){
+        gameKeys.value.battingPlayer = 'Computer';
+        gameKeys.value.bowlingPlayer = 'You';
+      }
+      else {}
+      gameKeys.value.battingPlayer = 'You';
+      gameKeys.value.bowlingPlayer = 'Computer';
+    }
+  }
   gameKeys.value.propsData = {open:false,part:''}
 }
 

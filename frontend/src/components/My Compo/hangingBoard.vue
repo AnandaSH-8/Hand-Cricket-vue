@@ -75,7 +75,8 @@ function tossSelected(toss){
 function closeBoard(result,value){
 	if(result){
 		board.value.open = false;
-		emit('closeBoard',value);
+		if(value == 'toss') emit('closeBoard',value, board.value.toss);
+		else emit('closeBoard',value);
 	}
 	else{
 		board.value = {open:true,part:'restart'}

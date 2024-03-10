@@ -31,7 +31,7 @@
                         <v-col cols="1" class="py-1"></v-col>
                         <v-col cols="4" class="ballWicks py-1">
                         <kbd>Balls:<v-icon class="ballsInfo" size="x-small" color="white" icon="mdi-information-outline"></v-icon>
-                            <span class="balls-tooltip">If 0 ball selected, then it is considered as Infinity balls</span>
+                            <span class="balls-tooltip">If 0 ball selected, then it is considered as unlimited balls</span>
                         </kbd>
                             <v-select :items="[0,6,12,18,30,60,100,120]" v-model="settingData.balls"
                                 density="compact" variant="outlined"></v-select>
@@ -214,14 +214,16 @@ function saveSettings(){
 .ballsInfo:hover + .balls-tooltip{
     visibility: visible;
     width:220px;
-    height:45px;
-    padding:2px;
+    height:38px;
+    padding-left: 5px;
+    padding-top: 4px;
     color:rgb(101, 101, 101);
     border-radius: 10px;
     font-size: 12px;
     transform: translate(-30px,30px);
     background-color: rgb(236, 234, 234);
     z-index: 1000 !important;
+    line-height: 15px;
 }
 
 .balls-tooltip{
