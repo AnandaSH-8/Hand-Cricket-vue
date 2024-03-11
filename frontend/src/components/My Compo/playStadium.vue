@@ -8,41 +8,41 @@
       <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Zero.svg"
+            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Zero.png"
             alt="ZeroRun" @click="RunHit('Zero',0)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/One.svg" 
+            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/One.png" 
             alt="OneRun" @click="RunHit('One',1)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Two.svg" 
+            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Two.png" 
             alt="TwoRun" @click="RunHit('Two',2)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions">
         <v-col>
             <img
-              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Three.svg" 
+              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Three.png" 
               alt="ThreeRun" @click="RunHit('Three',3)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Four.svg" 
+              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Four.png" 
             alt="FourRun" @click="RunHit('Four',4)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Five.svg" 
+              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Five.png" 
             alt="FiveRun" @click="RunHit('Five',5)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Six.svg" 
+              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Six.png" 
             alt="SixRun" @click="RunHit('Six',6)" />
         </v-col>
       </v-row>
@@ -67,6 +67,7 @@
             <v-col class="px-0" cols="4">name : {{bowlingPlayer}}</v-col>
             <v-col class="px-0 pl-2" cols="3">Bowls : 6</v-col>
           </v-row>
+
           <v-row class="scoredCard-lastRow">
             <v-col class="infoIconBox pa-0">
               <v-menu>
@@ -125,17 +126,18 @@ onMounted(() => {
 
 function RunHit(run,inNum){
   store.setActions(true,'loader');
-  if(gameKeys.value.gameStage !== 'toss'){
-      const emptyCard = setTimeout(()=>{
-        gameKeys.value.scoredRun.str = '';
-        clearTimeout(emptyCard);
-    },5000)
-  }
   gameKeys.value.scoredRun = {str:run,num:inNum}
   if (gameKeys.value.scoredRun.str !== '') {
     gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun.str}.svg`,import.meta.url).href
   }
   displayComputerRun()
+  if(gameKeys.value.gameStage !== 'toss'){
+      const emptyCard = setTimeout(()=>{
+        gameKeys.value.scoredRun.str = '';
+        gameKeys.value.computerRun.str = '';
+        clearTimeout(emptyCard);
+    },5000)
+  }
 }
 
 function displayComputerRun(){
@@ -200,9 +202,10 @@ function closeDialog(time,toss){
         gameKeys.value.battingPlayer = 'Computer';
         gameKeys.value.bowlingPlayer = 'You';
       }
-      else {}
-      gameKeys.value.battingPlayer = 'You';
-      gameKeys.value.bowlingPlayer = 'Computer';
+      else {
+        gameKeys.value.battingPlayer = 'You';
+        gameKeys.value.bowlingPlayer = 'Computer';
+      }
     }
   }
   gameKeys.value.propsData = {open:false,part:''}

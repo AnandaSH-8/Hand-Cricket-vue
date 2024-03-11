@@ -24,13 +24,23 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from 'vue-router'
 import { ref } from 'vue';
+import { useGlobalStore } from "@/stores";
 
 const router = useRouter();
+const store = useGlobalStore();
 
 let username = ref('');
+onMounted(()=>{
+    store.setActions(
+        {battingSelected:true,
+        bowlingSelected:true,
+        balls:0,
+        wickets:1,
+    },'setting')
+})
 
 function buttonActions(action){
     if (action == 'play') {
