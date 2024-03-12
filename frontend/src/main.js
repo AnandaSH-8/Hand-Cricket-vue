@@ -7,7 +7,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
-import GlobalLoader from "./global/loaderStyle.vue";
+import GlobalLoader from "./Global/loaderStyle.vue";
 
 import App from './App.vue';
 import router from './router';

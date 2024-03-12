@@ -20,7 +20,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { RouterView,useRouter } from 'vue-router'
-import GameLoader from "./global/loaderStyle.vue"
+import GameLoader from "./Global/loaderStyle.vue"
 const router = useRouter();
 
 onMounted(()=>{
