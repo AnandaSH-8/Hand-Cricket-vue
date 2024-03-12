@@ -43,18 +43,12 @@ onMounted(()=>{
 })
 
 function buttonActions(action){
-    if (action == 'play') {
-        router.push({path:'/gameStadium'})
-    }
-    else{
-        router.push({path:'/gameSettings'})
-    }
+    if (action == 'play') router.push({path:'/gameStadium'});
+    else router.push({path:'/gameSettings'});
 }
 
 const checkUserName = computed(()=>{
-    if(username.value.length > 2 && username.value.toString().trim()){
-        return false;
-    }
+    if(username.value.length > 2 && username.value.toString().trim()) return false;
     return true;
 })
 
