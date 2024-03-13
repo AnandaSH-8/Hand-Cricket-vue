@@ -127,7 +127,6 @@ onMounted(() => {
 })
 
 function RunHit(run,inNum){
-  // store.setActions(true,'loader');
   gameKeys.value.scoredRun = {str:run,num:inNum}
   if (gameKeys.value.scoredRun.str !== '') {
     gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun.str}.svg`,import.meta.url).href
@@ -162,7 +161,6 @@ function displayComputerRun(){
 
     const wait = setTimeout(()=>{
       checkRunandResult()
-      // store.setActions(false,'loader');
       clearTimeout(wait);
     },500)
 }
