@@ -85,7 +85,7 @@ function saveSettings(){
 
 <style scoped>
 .settings{
-    background-color: #81c9fc;
+    background-color:#188fff;
     display: flex;
 }
 .settings > .v-card{

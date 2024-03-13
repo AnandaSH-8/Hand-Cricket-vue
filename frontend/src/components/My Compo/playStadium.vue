@@ -1,6 +1,6 @@
 <template>
   <v-layout class="HCbox">
-    <v-container class="playerOne">
+    <v-container class="playerOne" :style="{border: shineBorder ? '3px solid yellow':''}">
       <v-card class="RunImage">
        <v-card-title class="cardTitle">You</v-card-title>
         <img v-if="gameKeys.scoredRun.str" :src="gameKeys.imagePath" alt="runImg">
@@ -8,41 +8,41 @@
       <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Zero.png"
+            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid #f9b851':'3px solid#188fff'}" src="../../assets/component Images/Zero.png"
             alt="ZeroRun" @click="RunHit('Zero',0)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/One.png" 
+            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid #f9b851':'3px solid#188fff'}" src="../../assets/component Images/One.png" 
             alt="OneRun" @click="RunHit('One',1)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Two.png" 
+            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid #f9b851':'3px solid#188fff'}" src="../../assets/component Images/Two.png" 
             alt="TwoRun" @click="RunHit('Two',2)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions">
         <v-col>
             <img
-              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Three.png" 
+              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Three.png" 
               alt="ThreeRun" @click="RunHit('Three',3)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Four.png" 
+              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Four.png" 
             alt="FourRun" @click="RunHit('Four',4)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Five.png" 
+              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Five.png" 
             alt="FiveRun" @click="RunHit('Five',5)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid red':'3px solid #81c9fc'}" src="../../assets/component Images/Six.png" 
+              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Six.png" 
             alt="SixRun" @click="RunHit('Six',6)" />
         </v-col>
       </v-row>
@@ -115,8 +115,10 @@ let gameKeys = ref({
   tossMsg:null,
   battingPlayer:"",
   bowlingPlayer:'',
-
 })
+
+let shineBorder = ref(false);
+
 onBeforeMount(()=>{
     store.setActions(true,'loader');
 })
@@ -125,7 +127,7 @@ onMounted(() => {
 })
 
 function RunHit(run,inNum){
-  store.setActions(true,'loader');
+  // store.setActions(true,'loader');
   gameKeys.value.scoredRun = {str:run,num:inNum}
   if (gameKeys.value.scoredRun.str !== '') {
     gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun.str}.svg`,import.meta.url).href
@@ -141,10 +143,8 @@ function RunHit(run,inNum){
 }
 
 function displayComputerRun(){
-    gameKeys.value.timer = 4;
-    const timeEnds = setInterval(()=>{
-        gameKeys.value.timer--
-        if(gameKeys.value.timer == 0){
+    const timeEnds = setTimeout(()=>{
+
           const runs = [
               {str:'Zero',num:0}, {str:'One',num:1}, 
               {str:'Two',num:2}, {str:'Three',num:3}, 
@@ -156,11 +156,15 @@ function displayComputerRun(){
              str: new URL(`../../assets/component Images/${runScored.str}.svg`,import.meta.url).href,
              num:runScored.num,
           }
-          clearInterval(timeEnds)
-        }
-    },1500)
+          clearTimeout(timeEnds)
 
-    checkRunandResult()
+    },100)
+
+    const wait = setTimeout(()=>{
+      checkRunandResult()
+      // store.setActions(false,'loader');
+      clearTimeout(wait);
+    },500)
 }
 
 function checkRunandResult(){
@@ -182,7 +186,6 @@ function checkRunandResult(){
   else if (gameStage == 'game'){
     //
   }
-   store.setActions(false,'loader');
 }
 
 function closeDialog(time,toss){
@@ -190,6 +193,16 @@ function closeDialog(time,toss){
   gameKeys.value.computerRun.str = '';
   gameKeys.value.gameStage = time;
   gameKeys.value.tossSelected = toss;
+
+  if(time == 'toss'){
+    let count = 0;
+    let shine = setInterval(()=>{
+      count++;
+      shineBorder.value = !shineBorder.value
+      if(count >= 4) clearInterval(shine);
+    },400)
+  }
+
   if(time == 'game'){
     if(gameKeys.value.tossResult == 'win'){
       gameKeys.value.battingPlayer = 'You';
@@ -215,7 +228,7 @@ function closeDialog(time,toss){
 
 <style scoped>
 .HCbox {
-  background: #81c9fc;
+  background:#188fff;
   height: 92vh;
   padding: 5vh 10%;
 }
@@ -287,7 +300,7 @@ function closeDialog(time,toss){
 .RunOptions .v-col img {
   border-radius: 10% 10%;
   width: 100%;
-  border: 3px solid #81c9fc;
+  border: 3px solid#188fff;
   cursor: pointer;
 }
 .stadiumDesign {
@@ -310,7 +323,7 @@ function closeDialog(time,toss){
   margin:3%;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 10px;
-  background-color: #81c9fc;
+  background-color:#188fff;
   color:white;
   padding:1%;
 }

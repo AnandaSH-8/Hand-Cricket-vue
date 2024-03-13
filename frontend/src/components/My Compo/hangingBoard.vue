@@ -92,7 +92,7 @@ function quitRestart(restart){
 		board.value = {open:true,part:'toss'};
 	}
 	else{
-		router.push({path:'/'});
+		router.push({path:'/gameHome'});
 	}
 }
 

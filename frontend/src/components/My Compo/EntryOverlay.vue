@@ -1,5 +1,5 @@
 <template>
-    <v-layout style=" background: #81c9fc">
+    <v-layout style=" background:#188fff">
         <v-card width="350" height="450" class="entryCard">
             <v-text-field
                 v-model="username" class="userNameInput"
