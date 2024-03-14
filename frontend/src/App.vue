@@ -20,10 +20,16 @@
 <script setup>
 import { onMounted } from 'vue';
 import { RouterView,useRouter } from 'vue-router'
+import { useFavicon } from '@vueuse/core'
 import GameLoader from "./Global/loaderStyle.vue"
 const router = useRouter();
+const icon = useFavicon();
 
 onMounted(()=>{
+  const gestures = ['Zero','One','Two','Three','Four','Five','Six'];
+  const iconImage = gestures[Math.floor(Math.random() * gestures.length)];
+  icon.value = `${iconImage}.png`;
+  
   router.push({path:'/gameHome'})
 })
 </script>

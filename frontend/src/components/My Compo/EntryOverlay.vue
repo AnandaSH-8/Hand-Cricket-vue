@@ -1,6 +1,6 @@
 <template>
     <v-layout style=" background:#188fff">
-        <v-card width="350" height="450" class="entryCard">
+        <v-card width="350" height="400" class="entryCard">
             <v-text-field
                 v-model="username" class="userNameInput"
                 :rules="[v => !!v.toString().trim() || 'Minimum 3 letters']"
