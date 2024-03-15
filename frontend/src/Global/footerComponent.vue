@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <v-layout>
         Footer
-    </div>
+    </v-layout>
 </template>
 <script setup>
+import { ref } from 'vue';
 </script>
 <style>
     
