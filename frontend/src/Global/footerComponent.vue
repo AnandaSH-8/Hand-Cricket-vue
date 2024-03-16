@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        Footer
+        
     </v-layout>
 </template>
 <script setup>

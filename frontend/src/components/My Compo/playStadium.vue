@@ -58,14 +58,14 @@
                 `Wicket : ${store.setData.settings.wickets}`}}</v-col>
           </v-row>
           <v-row class="scoredCard-thirdRow">
-            <v-col class="px-2" cols="5"><b>Batting:</b>{{battingPlayer}}</v-col>
-            <v-col class="px-0" cols="4"><b>name:</b> {{battingPlayer}}</v-col>
-            <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> 888</v-col>
+            <v-col class="px-2" cols="5"><b>Batting:</b>{{gameKeys.battingPlayer}}</v-col>
+            <v-col class="px-0" cols="4"><b>name:</b> {{gameKeys.battingPlayer}}</v-col>
+            <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }}  </v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
-            <v-col class="px-2" cols="5">Bowling : {{bowlingPlayer}}</v-col>
-            <v-col class="px-0" cols="4">name : {{bowlingPlayer}}</v-col>
-            <v-col class="px-0 pl-2" cols="3">Bowls : 6</v-col>
+            <v-col class="px-2" cols="5">Bowling : {{gameKeys.bowlingPlayer}}</v-col>
+            <v-col class="px-0" cols="4">name : {{gameKeys.bowlingPlayer}}</v-col>
+            <v-col class="px-0 pl-2" cols="3">Bowls : {{ gameKeys.totalBalls }} </v-col>
           </v-row>
 
           <v-row class="scoredCard-lastRow">
@@ -115,6 +115,8 @@ let gameKeys = ref({
   tossMsg:null,
   battingPlayer:"",
   bowlingPlayer:'',
+  totalRuns:0,
+  totalBalls:0
 })
 
 let shineBorder = ref(false);
@@ -132,11 +134,19 @@ function RunHit(run,inNum){
     gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun.str}.svg`,import.meta.url).href
   }
   displayComputerRun()
-  if(gameKeys.value.gameStage !== 'toss'){
-      const emptyCard = setTimeout(()=>{
-        gameKeys.value.scoredRun.str = '';
-        gameKeys.value.computerRun.str = '';
-        clearTimeout(emptyCard);
+  if(gameKeys.value.gameStage == 'game'){
+
+    if(gameKeys.value.battingPlayer == 'You'){
+        gameKeys.value.totalRuns += inNum;
+    }
+    else {
+      gameKeys.value.totalBalls += 1;
+    }
+    const emptyCard = setTimeout(()=>{
+      gameKeys.value.scoredRun.str = '';
+      gameKeys.value.computerRun.str = '';
+      clearTimeout(emptyCard);
+
     },5000)
   }
 }
@@ -167,8 +177,9 @@ function displayComputerRun(){
 
 function checkRunandResult(){
   let {computerRun,scoredRun,gameStage,tossSelected} = gameKeys.value;
-  const runs = computerRun.num + scoredRun.num;
+  
   if(gameStage == 'toss'){
+    const runs = computerRun.num + scoredRun.num;
     const tossDecision = runs/2 ? 'Odd' : 'Even';
     if(tossSelected == tossDecision){
       gameKeys.value.tossResult = 'win';
@@ -182,7 +193,9 @@ function checkRunandResult(){
     }
   }
   else if (gameStage == 'game'){
-    //
+    if(computerRun.num == scoredRun.num){
+      console.log('OUT');
+    }
   }
 }
 
