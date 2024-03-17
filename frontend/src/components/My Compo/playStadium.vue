@@ -60,7 +60,7 @@
           <v-row class="scoredCard-thirdRow">
             <v-col class="px-2" cols="5"><b>Batting:</b>{{gameKeys.battingPlayer}}</v-col>
             <v-col class="px-0" cols="4"><b>name:</b> {{gameKeys.battingPlayer}}</v-col>
-            <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }}  </v-col>
+            <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }} / {{ gameKeys.goneWickets }}  </v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
             <v-col class="px-2" cols="5">Bowling : {{gameKeys.bowlingPlayer}}</v-col>
@@ -116,7 +116,8 @@ let gameKeys = ref({
   battingPlayer:"",
   bowlingPlayer:'',
   totalRuns:0,
-  totalBalls:0
+  totalBalls:0,
+  goneWickets:0
 })
 
 let shineBorder = ref(false);
@@ -194,7 +195,7 @@ function checkRunandResult(){
   }
   else if (gameStage == 'game'){
     if(computerRun.num == scoredRun.num){
-      console.log('OUT');
+      gameKeys.value.goneWickets += 1;
     }
   }
 }
