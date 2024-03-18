@@ -18,6 +18,11 @@
                     @click="buttonActions('set')">
                     Settings &nbsp;
                 </v-btn>
+                <v-btn 
+                    class="globalButton mt-4"  prepend-icon="mdi-book-open-outline"
+                    @click="buttonActions('tutorial')">
+                    Tutorial &nbsp;
+                </v-btn>
             </v-card-actions>
         </v-card>
     </v-layout>
@@ -34,6 +39,7 @@ const store = useGlobalStore();
 
 let username = ref('');
 onMounted(()=>{
+    username.value = store.setData.userName;
     store.setActions(
         {battingSelected:true,
         bowlingSelected:true,
@@ -43,6 +49,7 @@ onMounted(()=>{
 })
 
 function buttonActions(action){
+    store.setActions(username.value,'username')
     if (action == 'play') router.push({path:'/gameStadium'});
     else router.push({path:'/gameSettings'});
 }

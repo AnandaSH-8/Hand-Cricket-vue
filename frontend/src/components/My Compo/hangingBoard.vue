@@ -13,7 +13,9 @@
 						<v-btn size="small" class="tossBtn globalButton" @click="closeBoard(true,'toss')">Ok</v-btn>
 					</template>
 					<template v-if="board.part == 'tossWin'">
-						<p class="boardTitle">Congratulations! You've won the toss; 
+						<p class="boardTitle">Congratulations!
+              <br>
+              You've won the toss; 
 							<br>
 							It's time to choose
 						</p>
@@ -118,8 +120,7 @@ function quitRestart(restart){
 
 	.stadiumActions{
   position: relative;
-  top:75%;
-  transform: translateY(-100%);
+  top:35%;
   display:block;
   text-align:center;
 	width:86%;
@@ -128,7 +129,7 @@ function quitRestart(restart){
 }
 
 .stadiumActions .boardTitle{
-  font-size: 20px;
+	font-size: 20px;
 	color:white;
 	font-weight: 600;
 }

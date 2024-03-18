@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('store',() => {
   const setData = ref({
+    userName:"",
     loader:false,
     settings:null,
     tossWinMsg:null,
@@ -11,16 +12,20 @@ export const useGlobalStore = defineStore('store',() => {
 
   function setActions(value,from){
     switch (from) {
+      case 'username':{
+        setData.value.userName = value;
+        break;
+      }
       case 'loader':{
-          setData.value.loader = value;
+        setData.value.loader = value;
         break;
       }
       case 'setting':{
-          setData.value.settings = value;
+        setData.value.settings = value;
         break;
       }
       case 'tossWin':{
-          setData.value.tossWinMsg = value;
+        setData.value.tossWinMsg = value;
         break;
       }
     }

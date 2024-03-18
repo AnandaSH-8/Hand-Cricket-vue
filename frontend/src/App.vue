@@ -14,14 +14,16 @@
     </v-app-bar>
   </v-layout>
   <RouterView />
+  <FooterComponent />
   <GameLoader/>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
-import { RouterView,useRouter } from 'vue-router'
-import { useFavicon } from '@vueuse/core'
-import GameLoader from "./Global/loaderStyle.vue"
+import { RouterView,useRouter } from 'vue-router';
+import { useFavicon } from '@vueuse/core';
+import GameLoader from "./Global/loaderStyle.vue";
+import FooterComponent from './Global/footerComponent.vue';
 const router = useRouter();
 const icon = useFavicon();
 
