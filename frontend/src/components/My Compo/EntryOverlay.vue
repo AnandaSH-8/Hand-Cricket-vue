@@ -65,9 +65,7 @@ const checkUserName = computed(()=>{
 .entryCard{
     box-shadow: 0px 4px 8px -2px rgba(9, 30, 66, 0.25), 0px 0px 0px 1px rgba(9, 30, 66, 0.08);
     border-radius:5%;
-    margin: auto;
-    margin-top: 7vh;
-    margin-bottom: 9vh;
+    margin: 6vh auto;
     background: #f9b851;
     text-align: center;
 }
