@@ -3,16 +3,16 @@
         <!-- <v-sheet class="footerLogo">
             <img src="../assets/component Images/hc7-transformed.png" alt="">
         </v-sheet> -->
-        <v-sheet class="footersheetContent">
-            <h1 style="font-family: 'Gugi';">Hand Cricket</h1>
-            <kbd>Made by ASH</kbd>
-            <h4>Connect</h4>
+        <v-sheet class="footersheetContent px-10">
+            <h1>Hand Cricket</h1>
+            <p>Made by <a class="portfolio" href="https://ash-portfolio-two.vercel.app/">ASH</a></p>
+            <p>Connect</p>
             <div class="footerIcons">
-                <a href=""><v-icon icon="mdi-github"></v-icon></a>
-               <a href=""> <v-icon icon="mdi-twitter"></v-icon></a>
-                <a href=""><v-icon icon="mdi-linkedin"></v-icon></a>
+                <a href="https://github.com/Anands-88"><v-icon icon="mdi-github"></v-icon></a>
+                <a href="https://linkedin.com/in/https://www.linkedin.com/in/ananda-s-holla-268b94147/"><v-icon icon="mdi-linkedin"></v-icon></a>
+                <a href="https://x.com/anandsholla8"> <v-icon icon="mdi-twitter"></v-icon></a>
             </div>
-            <kbd>©2024</kbd>
+            <p style="font-size: 12px">© HandCricket 2024</p>
         </v-sheet>
         <!-- <v-sheet></v-sheet> -->
     </v-layout>
@@ -30,7 +30,6 @@ import { ref } from 'vue';
 .footerLogo{
     width:100px;
     height:100px;
-    /* border:2px solid red; */
 }
 
 .footerLogo > img{
@@ -39,14 +38,32 @@ import { ref } from 'vue';
 }
 
 .footerLayout > .footersheetContent{
-    background-color: #f9b851;
+    background-color: #fcb037;
     text-align: center;
     color:white;
+    font-family: 'Gugi';
+}
+
+.footersheetContent > p{
+    font-size: 13px;
 }
 
 .footerIcons{
-    border:2px solid red;
     display: flex;
+    width:70%;
+    margin: auto;
     justify-content: space-evenly;
+}
+
+.portfolio, .footerIcons > *{
+    color:white;
+}
+
+.portfolio:hover, .footerIcons :hover{
+    background-color:#f9b851;
+}
+
+.portfolio:hover, .footerIcons > *:hover{
+    color:#188fff;
 }
 </style>
