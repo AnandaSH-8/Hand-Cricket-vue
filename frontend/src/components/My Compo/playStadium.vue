@@ -8,41 +8,48 @@
       <v-row class="RunOptions RunOptions_firstRow">
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid #f9b851':'3px solid#188fff'}" src="../../assets/component Images/Zero.png"
+            :style="{border:gameKeys.scoredRun.str =='Zero' ? '2px solid #f9b851':'3px solid#188fff'}" 
+            src="../../assets/component Images/Zero.png"
             alt="ZeroRun" @click="RunHit('Zero',0)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid #f9b851':'3px solid#188fff'}" src="../../assets/component Images/One.png" 
+            :style="{border:gameKeys.scoredRun.str =='One' ? '2px solid #f9b851':'3px solid#188fff'}" 
+            src="../../assets/component Images/One.png" 
             alt="OneRun" @click="RunHit('One',1)" />
         </v-col>
         <v-col>
           <img
-            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid #f9b851':'3px solid#188fff'}" src="../../assets/component Images/Two.png" 
+            :style="{border:gameKeys.scoredRun.str =='Two' ? '2px solid #f9b851':'3px solid#188fff'}" 
+            src="../../assets/component Images/Two.png" 
             alt="TwoRun" @click="RunHit('Two',2)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions">
         <v-col>
             <img
-              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Three.png" 
+              :style="{border:gameKeys.scoredRun.str =='Three' ? '2px solid #f9b851':'3px solid #188fff'}" 
+              src="../../assets/component Images/Three.png" 
               alt="ThreeRun" @click="RunHit('Three',3)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Four.png" 
+              :style="{border:gameKeys.scoredRun.str =='Four' ? '2px solid #f9b851':'3px solid #188fff'}" 
+              src="../../assets/component Images/Four.png" 
             alt="FourRun" @click="RunHit('Four',4)" />
         </v-col>
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Five.png" 
+              :style="{border:gameKeys.scoredRun.str =='Five' ? '2px solid #f9b851':'3px solid #188fff'}" 
+              src="../../assets/component Images/Five.png" 
             alt="FiveRun" @click="RunHit('Five',5)" />
         </v-col>
       </v-row>
       <v-row class="RunOptions RunOptions_lastRow">
         <v-col>
           <img
-              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid #f9b851':'3px solid #188fff'}" src="../../assets/component Images/Six.png" 
+              :style="{border:gameKeys.scoredRun.str =='Six' ? '2px solid #f9b851':'3px solid #188fff'}" 
+              src="../../assets/component Images/Six.png" 
             alt="SixRun" @click="RunHit('Six',6)" />
         </v-col>
       </v-row>
@@ -247,9 +254,7 @@ function closeDialog(time,toss){
 
 .HCbox > * {
   border-radius: 5%;
-  box-shadow:
-    rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  box-shadow:rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
 .cardTitle{
