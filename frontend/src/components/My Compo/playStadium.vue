@@ -66,7 +66,7 @@
           </v-row>
           <v-row class="scoredCard-thirdRow">
             <v-col class="px-2" cols="5"><b>Batting:</b>{{gameKeys.battingPlayer}}</v-col>
-            <v-col class="px-0" cols="4"><b>name:</b> {{gameKeys.battingPlayer}}</v-col>
+            <v-col class="px-0" cols="4"><b>name:</b> {{store.setData.userName}}</v-col>
             <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }} / {{ gameKeys.goneWickets }}  </v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
@@ -124,7 +124,8 @@ let gameKeys = ref({
   bowlingPlayer:'',
   totalRuns:0,
   totalBalls:0,
-  goneWickets:0
+  goneWickets:0,
+  inningsCount:0,
 })
 
 let shineBorder = ref(false);
@@ -204,6 +205,22 @@ function checkRunandResult(){
     if(computerRun.num == scoredRun.num){
       gameKeys.value.goneWickets += 1;
     }
+
+    if(store.setData.settings.wickets == gameKeys.value.goneWickets){
+      if(gameKeys.value.inningsCount == 1){
+        if( gameKeys.value.battingPlayer == 'You'){
+          gameKeys.value.battingPlayer= 'Computer';
+          gameKeys.value.bowlingPlayer = 'You';
+        }
+        else{
+          gameKeys.value.battingPlayer= 'You';
+          gameKeys.value.bowlingPlayer = 'Computer';
+        }
+      }
+      else {
+        gameKeys.value.propsData = {open:true, part:'gameOver'};
+      }
+    }
   }
 }
 
@@ -223,6 +240,9 @@ function closeDialog(time,toss){
   }
 
   if(time == 'game'){
+
+    gameKeys.value.inningsCount = 1;
+
     if(gameKeys.value.tossResult == 'win'){
       gameKeys.value.battingPlayer = 'You';
       gameKeys.value.bowlingPlayer = 'Computer';
