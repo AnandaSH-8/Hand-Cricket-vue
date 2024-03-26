@@ -8,9 +8,15 @@
             <p>Made by <a class="portfolio" href="https://ash-portfolio-two.vercel.app/">ASH</a></p>
             <p>Connect</p>
             <div class="footerIcons">
-                <a href="https://github.com/Anands-88"><v-icon icon="mdi-github"></v-icon></a>
-                <a href="https://linkedin.com/in/https://www.linkedin.com/in/ananda-s-holla-268b94147/"><v-icon icon="mdi-linkedin"></v-icon></a>
-                <a href="https://x.com/anandsholla8"> <v-icon icon="mdi-twitter"></v-icon></a>
+                <a class="footerGit" href="https://github.com/Anands-88">
+                    <v-icon icon="mdi-github"></v-icon>
+                </a>
+                <a class="footerLinked" href="https://linkedin.com/in/https://www.linkedin.com/in/ananda-s-holla-268b94147/">
+                    <v-icon icon="mdi-linkedin"></v-icon>
+                </a>
+                <a class="footerTwitter" href="https://x.com/anandsholla8"> 
+                    <v-icon icon="mdi-twitter"></v-icon>
+                </a>
             </div>
             <p style="font-size: 12px">© HandCricket 2024</p>
         </v-sheet>
@@ -63,7 +69,15 @@ import { ref } from 'vue';
     background-color:#f9b851;
 }
 
-.portfolio:hover, .footerIcons > *:hover{
+.portfolio:hover, .footerIcons > .footerTwitter:hover{
     color:#188fff;
+}
+
+.footerGit:hover{
+    color:black;
+}
+
+.footerLinked:hover{
+    color:#0A66C2;
 }
 </style>

@@ -189,7 +189,7 @@ function checkRunandResult(){
   
   if(gameStage == 'toss'){
     const runs = computerRun.num + scoredRun.num;
-    const tossDecision = runs/2 ? 'Odd' : 'Even';
+    const tossDecision = runs%2 ? 'Even' : 'Odd';
     if(tossSelected == tossDecision){
       gameKeys.value.tossResult = 'win';
       gameKeys.value.propsData = {open:true,part:'tossWin'}

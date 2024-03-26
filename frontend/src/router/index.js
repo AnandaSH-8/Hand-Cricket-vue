@@ -31,6 +31,11 @@ const router = createRouter({
       path:'/gameSettings',
       name:'GameSettings',
       component: () => import('../components/My Compo/gameSettings.vue')
+    },
+    {
+      path:'/gameTutorial',
+      name:'GameTutorial',
+      component: () => import('../components/My Compo/gameTutorials.vue')
     }
   ]
 })
