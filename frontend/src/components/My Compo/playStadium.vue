@@ -66,12 +66,12 @@
           </v-row>
           <v-row class="scoredCard-thirdRow">
             <v-col class="px-2" cols="5"><b>Batting:</b>{{gameKeys.battingPlayer}}</v-col>
-            <v-col class="px-0" cols="4"><b>name:</b> {{store.setData.userName}}</v-col>
+            <v-col class="px-0" cols="4"><b>name:</b>{{gameKeys.battingPlayer == 'You'? store.setData.userName : 'Computer'}} {{store.setData.userName}}</v-col>
             <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }} / {{ gameKeys.goneWickets }}  </v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
             <v-col class="px-2" cols="5">Bowling : {{gameKeys.bowlingPlayer}}</v-col>
-            <v-col class="px-0" cols="4">name : {{gameKeys.bowlingPlayer}}</v-col>
+            <v-col class="px-0" cols="4">name : {{gameKeys.bowlingPlayer == 'You' ? store.setData.userName : 'Computer'}}</v-col>
             <v-col class="px-0 pl-2" cols="3">Bowls : {{ gameKeys.totalBalls }} </v-col>
           </v-row>
 
