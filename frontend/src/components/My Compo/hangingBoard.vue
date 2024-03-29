@@ -14,8 +14,8 @@
 					</template>
 					<template v-if="board.part == 'tossWin'">
 						<p class="boardTitle">Congratulations!
-              <br>
-              You've won the toss; 
+							<br>
+							You've won the toss; 
 							<br>
 							It's time to choose
 						</p>
@@ -86,7 +86,9 @@ function closeBoard(result,value){
 }
 
 function optionSelection(opt){
-	board.value = {open:true,part:'gamePlan',opt}
+	const message = `You won the toss and chose to ${opt} first`;
+	store.setActions(message,'tossWin');
+	board.value = {open:true,part:'gamePlan',opt};
 }
 
 function quitRestart(restart){

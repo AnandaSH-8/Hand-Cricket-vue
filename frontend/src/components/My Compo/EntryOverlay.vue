@@ -51,7 +51,7 @@ onMounted(()=>{
 function buttonActions(action){
     store.setActions(username.value,'username')
     if (action == 'play') router.push({path:'/gameStadium'});
-    if(action == 'tutorial') router.push({path:'/gameTutorial'});
+    else if(action == 'tutorial') router.push({path:'/gameTutorial'});
     else router.push({path:'/gameSettings'});
 }
 

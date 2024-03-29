@@ -66,7 +66,7 @@
           </v-row>
           <v-row class="scoredCard-thirdRow">
             <v-col class="px-2" cols="5"><b>Batting:</b>{{gameKeys.battingPlayer}}</v-col>
-            <v-col class="px-0" cols="4"><b>name:</b>{{gameKeys.battingPlayer == 'You'? store.setData.userName : 'Computer'}} {{store.setData.userName}}</v-col>
+            <v-col class="px-0" cols="4"><b>name :</b>{{gameKeys.battingPlayer == ' You'? store.setData.userName : ' Computer'}}</v-col>
             <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }} / {{ gameKeys.goneWickets }}  </v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
@@ -137,20 +137,18 @@ onMounted(() => {
   gameKeys.value.propsData = {open:true, part:'toss'}
 })
 
-function RunHit(run,inNum){
+async function RunHit(run,inNum){
   gameKeys.value.scoredRun = {str:run,num:inNum}
   if (gameKeys.value.scoredRun.str !== '') {
     gameKeys.value.imagePath =  new URL(`../../assets/component Images/${gameKeys.value.scoredRun.str}.svg`,import.meta.url).href
   }
-  displayComputerRun()
-  if(gameKeys.value.gameStage == 'game'){
+  await displayComputerRun()
 
-    if(gameKeys.value.battingPlayer == 'You'){
-        gameKeys.value.totalRuns += inNum;
-    }
-    else {
-      gameKeys.value.totalBalls += 1;
-    }
+  if(gameKeys.value.gameStage == 'game'){
+    
+    gameKeys.value.totalRuns += inNum;
+    gameKeys.value.totalBalls += 1;
+console.log(`%c Ananda S Holla : Line number 151`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
     const emptyCard = setTimeout(()=>{
       gameKeys.value.scoredRun.str = '';
       gameKeys.value.computerRun.str = '';
@@ -160,7 +158,7 @@ function RunHit(run,inNum){
   }
 }
 
-function displayComputerRun(){
+async function displayComputerRun(){
     const timeEnds = setTimeout(()=>{
 
           const runs = [
@@ -178,18 +176,18 @@ function displayComputerRun(){
 
     },100)
 
-    const wait = setTimeout(()=>{
-      checkRunandResult()
+    const wait = setTimeout( async()=>{
+     await checkRunandResult()
       clearTimeout(wait);
     },500)
 }
 
-function checkRunandResult(){
+async function checkRunandResult(){
   let {computerRun,scoredRun,gameStage,tossSelected} = gameKeys.value;
   
   if(gameStage == 'toss'){
     const runs = computerRun.num + scoredRun.num;
-    const tossDecision = runs%2 ? 'Even' : 'Odd';
+    const tossDecision = runs%2 == 0 ? 'Even' : 'Odd';
     if(tossSelected == tossDecision){
       gameKeys.value.tossResult = 'win';
       gameKeys.value.propsData = {open:true,part:'tossWin'}
@@ -202,6 +200,7 @@ function checkRunandResult(){
     }
   }
   else if (gameStage == 'game'){
+    console.log(`%c Ananda S Holla : Line number 203`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
     if(computerRun.num == scoredRun.num){
       gameKeys.value.goneWickets += 1;
     }
@@ -221,6 +220,7 @@ function checkRunandResult(){
         gameKeys.value.propsData = {open:true, part:'gameOver'};
       }
     }
+    console.log(`%c Ananda S Holla : Line number 223`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
   }
 }
 
@@ -246,9 +246,11 @@ function closeDialog(time,toss){
     if(gameKeys.value.tossResult == 'win'){
       gameKeys.value.battingPlayer = 'You';
       gameKeys.value.bowlingPlayer = 'Computer';
+      console.log(store.setData.tossWinMsg,'IS AT LINE NUMBER 249');
       gameKeys.value.tossMsg = store.setData.tossWinMsg;
     }
     else{
+      console.log(`%c Ananda S Holla : Line number 252`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
       gameKeys.value.tossMsg = `Computer won the toss and decided to ${gameKeys.value.tossResult} first`;
       if(gameKeys.value.tossResult == 'Bat'){
         gameKeys.value.battingPlayer = 'Computer';
@@ -258,6 +260,8 @@ function closeDialog(time,toss){
         gameKeys.value.battingPlayer = 'You';
         gameKeys.value.bowlingPlayer = 'Computer';
       }
+
+      console.log(gameKeys.value.tossMsg,'IS AT LINE NUMBER 263');
     }
   }
   gameKeys.value.propsData = {open:false,part:''}
