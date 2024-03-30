@@ -8,7 +8,7 @@
             <p>Made by <a class="portfolio" href="https://ash-portfolio-two.vercel.app/">ASH</a></p>
             <p>Connect</p>
             <div class="footerIcons">
-                <a class="footerGit" href="https://github.com/Anands-88">
+                <a class="footerGit" href="https://github.com/AnandaSH-8">
                     <v-icon icon="mdi-github"></v-icon>
                 </a>
                 <a class="footerLinked" href="https://linkedin.com/in/https://www.linkedin.com/in/ananda-s-holla-268b94147/">
