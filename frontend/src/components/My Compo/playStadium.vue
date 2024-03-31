@@ -146,9 +146,15 @@ async function RunHit(run,inNum){
 
   if(gameKeys.value.gameStage == 'game'){
     
-    gameKeys.value.totalRuns += inNum;
+    if(gameKeys.value.battingPlayer == 'You'){
+        gameKeys.value.totalRuns += inNum;
+    }
+    else if(gameKeys.value.battingPlayer == 'Computer'){
+      gameKeys.value.totalRuns = gameKeys.value.computerRun.num;
+    }
+
     gameKeys.value.totalBalls += 1;
-console.log(`%c Ananda S Holla : Line number 151`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
+
     const emptyCard = setTimeout(()=>{
       gameKeys.value.scoredRun.str = '';
       gameKeys.value.computerRun.str = '';
@@ -200,7 +206,6 @@ async function checkRunandResult(){
     }
   }
   else if (gameStage == 'game'){
-    console.log(`%c Ananda S Holla : Line number 203`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
     if(computerRun.num == scoredRun.num){
       gameKeys.value.goneWickets += 1;
     }
@@ -220,7 +225,6 @@ async function checkRunandResult(){
         gameKeys.value.propsData = {open:true, part:'gameOver'};
       }
     }
-    console.log(`%c Ananda S Holla : Line number 223`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
   }
 }
 
@@ -246,11 +250,9 @@ function closeDialog(time,toss){
     if(gameKeys.value.tossResult == 'win'){
       gameKeys.value.battingPlayer = 'You';
       gameKeys.value.bowlingPlayer = 'Computer';
-      console.log(store.setData.tossWinMsg,'IS AT LINE NUMBER 249');
       gameKeys.value.tossMsg = store.setData.tossWinMsg;
     }
     else{
-      console.log(`%c Ananda S Holla : Line number 252`, 'color:orange;font-size:18px;font-family: Trebuchet MS, Trebuchet MS, sans-serif;font-weight:800')
       gameKeys.value.tossMsg = `Computer won the toss and decided to ${gameKeys.value.tossResult} first`;
       if(gameKeys.value.tossResult == 'Bat'){
         gameKeys.value.battingPlayer = 'Computer';
@@ -261,7 +263,6 @@ function closeDialog(time,toss){
         gameKeys.value.bowlingPlayer = 'Computer';
       }
 
-      console.log(gameKeys.value.tossMsg,'IS AT LINE NUMBER 263');
     }
   }
   gameKeys.value.propsData = {open:false,part:''}
