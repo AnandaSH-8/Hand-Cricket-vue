@@ -65,9 +65,9 @@
                 `Wicket : ${store.setData.settings.wickets}`}}</v-col>
           </v-row>
           <v-row class="scoredCard-thirdRow">
-            <v-col class="px-2" cols="5"><b>Batting:</b>{{gameKeys.battingPlayer}}</v-col>
+            <v-col class="px-2" cols="5"><b>Batting : </b>{{gameKeys.battingPlayer}}</v-col>
             <v-col class="px-0" cols="4"><b>name :</b>{{gameKeys.battingPlayer == ' You'? store.setData.userName : ' Computer'}}</v-col>
-            <v-col class="px-0 pl-2" cols="3"><b>Runs:</b> {{ gameKeys.totalRuns }} / {{ gameKeys.goneWickets }}  </v-col>
+            <v-col class="px-0 pl-2" cols="3"><b>Runs :</b> {{ gameKeys.totalRuns }} / {{ gameKeys.goneWickets }}  </v-col>
           </v-row>
           <v-row class="scoredCard-fourthRow">
             <v-col class="px-2" cols="5">Bowling : {{gameKeys.bowlingPlayer}}</v-col>
@@ -126,6 +126,7 @@ let gameKeys = ref({
   totalBalls:0,
   goneWickets:0,
   inningsCount:0,
+  isOut:false
 })
 
 let shineBorder = ref(false);
@@ -146,20 +147,22 @@ async function RunHit(run,inNum){
 
   if(gameKeys.value.gameStage == 'game'){
     
-    if(gameKeys.value.battingPlayer == 'You'){
-        gameKeys.value.totalRuns += inNum;
-    }
-    else if(gameKeys.value.battingPlayer == 'Computer'){
-      gameKeys.value.totalRuns = gameKeys.value.computerRun.num;
+    if(!gameKeys.value.isOut){ // if not out, then only add run
+      if(gameKeys.value.battingPlayer == 'You'){
+          gameKeys.value.totalRuns += inNum;
+      }
+      else if(gameKeys.value.battingPlayer == 'Computer'){
+        gameKeys.value.totalRuns = gameKeys.value.computerRun.num;
+      }
     }
 
     gameKeys.value.totalBalls += 1;
-
+    gameKeys.value.isOut = false;
+    
     const emptyCard = setTimeout(()=>{
       gameKeys.value.scoredRun.str = '';
       gameKeys.value.computerRun.str = '';
       clearTimeout(emptyCard);
-
     },5000)
   }
 }
@@ -185,6 +188,7 @@ async function displayComputerRun(){
     const wait = setTimeout( async()=>{
      await checkRunandResult()
       clearTimeout(wait);
+
     },500)
 }
 
@@ -208,10 +212,14 @@ async function checkRunandResult(){
   else if (gameStage == 'game'){
     if(computerRun.num == scoredRun.num){
       gameKeys.value.goneWickets += 1;
+      gameKeys.value.isOut = true;
     }
 
     if(store.setData.settings.wickets == gameKeys.value.goneWickets){
       if(gameKeys.value.inningsCount == 1){
+
+        gameKeys.value.propsData = {open:true,part:'firstIng'}
+
         if( gameKeys.value.battingPlayer == 'You'){
           gameKeys.value.battingPlayer= 'Computer';
           gameKeys.value.bowlingPlayer = 'You';

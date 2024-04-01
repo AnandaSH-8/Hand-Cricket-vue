@@ -42,6 +42,11 @@
 						<v-btn size="small" class="tossBtn globalButton" @click="quitRestart(false)">Quit</v-btn>
 						<v-btn size="small" class="tossBtn globalButton" @click="quitRestart(true)">Restart</v-btn>
 					</template>
+					<template v-if="board.part == 'firstIng'">
+						<p class="boardTitle"></p>
+						<!-- <v-btn size="small" class="tossBtn globalButton" @click="quitRestart(false)">Quit</v-btn>
+						<v-btn size="small" class="tossBtn globalButton" @click="quitRestart(true)">Restart</v-btn> -->
+					</template>
 				</v-card-actions> 	
 			</div>
     </v-dialog>
