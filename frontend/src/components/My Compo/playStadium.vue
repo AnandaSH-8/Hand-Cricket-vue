@@ -146,13 +146,12 @@ async function RunHit(run,inNum){
   await displayComputerRun()
 
   if(gameKeys.value.gameStage == 'game'){
-    
     if(!gameKeys.value.isOut){ // if not out, then only add run
       if(gameKeys.value.battingPlayer == 'You'){
           gameKeys.value.totalRuns += inNum;
       }
       else if(gameKeys.value.battingPlayer == 'Computer'){
-        gameKeys.value.totalRuns = gameKeys.value.computerRun.num;
+        gameKeys.value.totalRuns += gameKeys.value.computerRun.num;
       }
     }
 
